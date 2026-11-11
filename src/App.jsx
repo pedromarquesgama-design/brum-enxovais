@@ -138,9 +138,7 @@ export default function App() {
       />
 
       <main id="main-content" className="flex-1">
-        <Hero
-          onOpenSearch={() => setIsFilterSheetOpen(true)}
-        />
+        <Hero />
 
         <CategoryStrip
           selectedCategory={selectedCategory}

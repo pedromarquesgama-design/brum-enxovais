@@ -1,4 +1,12 @@
 import PRODUCTS_DATA from './catalog-items.json';
+import heroMobile1 from '../assets/hero/hero-mobile-1.jpg';
+import heroMobile2 from '../assets/hero/hero-mobile-2.jpg';
+import heroMobile3 from '../assets/hero/hero-mobile-3.jpg';
+import heroMobile4 from '../assets/hero/hero-mobile-4.jpg';
+import heroDesktop1 from '../assets/hero/hero-desktop-1.jpg';
+import heroDesktop2 from '../assets/hero/hero-desktop-2.jpg';
+import heroDesktop3 from '../assets/hero/hero-desktop-3.jpg';
+import heroDesktop4 from '../assets/hero/hero-desktop-4.jpg';
 
 // Contatos abaixo são ilustrativos (fictícios) até substituição pelos oficiais da Brum Enxovais.
 export const STORE_INFO = {
@@ -23,45 +31,10 @@ export const STORE_INFO = {
 };
 
 export const HERO_SLIDES = [
-  {
-    id: 'cama',
-    label: 'Quarto',
-    collectionTag: '01 / Quarto & Enxoval',
-    headlineMain: 'Enxovais e Utilidades',
-    headlineAccent: 'para Viver Bem.',
-    description:
-      'Descubra mais de 1.400 itens entre cama, mesa posta, banho, cozinha e utilidades escolhidas para o conforto do seu lar.',
-    image: '/produtos/hero-cama.jpg',
-    imageAlt: 'Quarto decorado com colcha matelassê damasco dourada sobre parede em tom azul petróleo',
-    imagePosition: 'object-center md:object-[65%_58%]',
-    targetCategory: 'Todos',
-  },
-  {
-    id: 'mesa',
-    label: 'Mesa Posta',
-    collectionTag: '02 / Mesa Posta',
-    headlineMain: 'A Arte de Receber',
-    headlineAccent: 'em Cada Detalhe.',
-    description:
-      'Jogos americanos em renda guipir, xícaras, taças, jarras e toalhas para compor do café da manhã ao jantar.',
-    image: '/produtos/hero-mesa.jpg',
-    imageAlt: 'Mesa posta com jogo americano bordado em renda guipir, taças e louça branca',
-    imagePosition: 'object-[center_45%] md:object-[62%_44%]',
-    targetCategory: 'Mesa',
-  },
-  {
-    id: 'banho',
-    label: 'Banho',
-    collectionTag: '03 / Linha Banho',
-    headlineMain: 'Fios Macios e Conforto',
-    headlineAccent: 'no Ritual Diário.',
-    description:
-      'Toalhas em jacquard, fio penteado e jogos coordenados de alta absorção para manter o banheiro acolhedor.',
-    image: '/produtos/hero-banho.jpg',
-    imageAlt: 'Conjunto de toalhas de banho e rosto em jacquard com acabamento em renda bordada',
-    imagePosition: 'object-[center_18%] md:object-[68%_12%]',
-    targetCategory: 'Banho',
-  },
+  { id: 'slide1', mobile: heroMobile1, desktop: heroDesktop1, alt: 'Maciez para todo dia' },
+  { id: 'slide2', mobile: heroMobile2, desktop: heroDesktop2, alt: 'Utilidades que resolvem' },
+  { id: 'slide3', mobile: heroMobile3, desktop: heroDesktop3, alt: 'Mesa posta com charme' },
+  { id: 'slide4', mobile: heroMobile4, desktop: heroDesktop4, alt: 'Um quarto para descansar' },
 ];
 
 export const CATEGORIES = [

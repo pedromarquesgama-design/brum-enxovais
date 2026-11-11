@@ -12,8 +12,8 @@ import heroDesktop4 from '../assets/hero/hero-desktop-4.jpg';
 export const STORE_INFO = {
   brandName: 'Brum Enxovais',
   tagline: 'Cama, Mesa, Banho e Utilidades',
-  phoneDisplay: '(11) 99842-3100',
-  whatsappDigits: '5511998423100',
+  phoneDisplay: '(37) 99949-8599',
+  whatsappDigits: '5537999498599',
   email: 'atendimento@brumenxovais.com.br',
   address: 'Rua das Paineiras, 420 — Centro, São Paulo/SP',
   hours: 'Seg a Sex: 09h às 18h · Sáb: 09h às 13h',

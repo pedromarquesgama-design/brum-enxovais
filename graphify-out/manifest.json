@@ -1,0 +1,86 @@
+{
+  ".oxlintrc.json": {
+    "mtime": 1794083865.632954,
+    "seen": 1794348756.964612,
+    "ast_hash": "5e6e3cea3e89137071c142dd7835b0ef",
+    "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
+  },
+  "package.json": {
+    "mtime": 1794342470.393485,
+    "seen": 1794348756.9646246,
+    "ast_hash": "b3a703f6d5cc511135be2e57a722c7a6",
+    "semantic_hash": "b3a703f6d5cc511135be2e57a722c7a6"
+  },
+  "src/App.jsx": {
+    "mtime": 1794083865.7422628,
+    "seen": 1794348756.9646304,
+    "ast_hash": "0b6326cb08b367ad5afe2f7e7a8ab722",
+    "semantic_hash": "0b6326cb08b367ad5afe2f7e7a8ab722"
+  },
+  "src/main.jsx": {
+    "mtime": 1794083865.7514088,
+    "seen": 1794348756.9646482,
+    "ast_hash": "e13723e2574429d9a6d849727e3ff695",
+    "semantic_hash": "e13723e2574429d9a6d849727e3ff695"
+  },
+  "vite.config.js": {
+    "mtime": 1794342555.5861971,
+    "seen": 1794348756.964653,
+    "ast_hash": "d281d66c4390899f561fa3db9b8e9eac",
+    "semantic_hash": "d281d66c4390899f561fa3db9b8e9eac"
+  },
+  "DESIGN.md": {
+    "mtime": 1794345033.6541257,
+    "seen": 1794348756.9646568,
+    "ast_hash": "e2764eda94c4f3b0f2cac9fbf622dbf3",
+    "semantic_hash": "e2764eda94c4f3b0f2cac9fbf622dbf3"
+  },
+  "README.md": {
+    "mtime": 1794083865.7703016,
+    "seen": 1794348756.9646606,
+    "ast_hash": "75eb386f17caf77fd6fe3ce1d90968ee",
+    "semantic_hash": "75eb386f17caf77fd6fe3ce1d90968ee"
+  },
+  "index.html": {
+    "mtime": 1794342312.4228914,
+    "seen": 1794348756.9646645,
+    "ast_hash": "59b661021098e8e833fb99b0af34da76",
+    "semantic_hash": "59b661021098e8e833fb99b0af34da76"
+  },
+  "public/brum-enxovais-logo.png": {
+    "mtime": 1794345464.3162942,
+    "seen": 1794348756.9646692,
+    "ast_hash": "43c3571808f4b1609902440c6554306e",
+    "semantic_hash": "43c3571808f4b1609902440c6554306e"
+  },
+  "public/favicon.svg": {
+    "mtime": 1794083865.9583132,
+    "seen": 1794348756.9646733,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "public/icons.svg": {
+    "mtime": 1794083866.0147724,
+    "seen": 1794348756.9646773,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "src/assets/hero.png": {
+    "mtime": 1794083865.864652,
+    "seen": 1794348756.9646826,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "src/assets/react.svg": {
+    "mtime": 1794083866.1346583,
+    "seen": 1794348756.9646866,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "src/assets/vite.svg": {
+    "mtime": 1794083866.203152,
+    "seen": 1794348756.9646907,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  }
+}

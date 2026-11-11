@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --color-primary: #1f434d;
+  --color-primary-strong: #032d36;
+  --color-primary-deep: #16333b;
+  --color-primary-soft: #eef4f5;
+
+  --color-accent: #fdae43;
+  --color-accent-hover: #f3a63b;
+  --color-accent-strong: #d98c25;
+  --color-accent-ink: #855300;
+  --color-accent-soft: #fef3df;
+
+  --color-cream: #faf8f5;
+  --color-linen: #f2eee8;
+  --color-surface: #ffffff;
+  --color-ice: #f1fbff;
+
+  --color-ink: #141d20;
+  --color-ink-strong: #121b1e;
+  --color-ink-muted: #41484a;
+
+  --color-hairline: #e6e2dc;
+  --color-hairline-dark: #2c5661;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-cream);
+    accent-color: var(--color-primary);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-cream);
+  }
+
+  input,
+  textarea,
+  select {
+    caret-color: var(--color-primary);
+  }
+
+  button,
+  a,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 2px;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

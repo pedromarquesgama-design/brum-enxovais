@@ -1,0 +1,1 @@
+{"nodes": [{"id": "src_assets_vite_asset", "label": "Vite Bundler SVG Logo", "file_type": "image", "source_file": "src/assets/vite.svg"}], "edges": [{"source": "src_assets_vite_asset", "target": "readme_vite_react_template", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/vite.svg", "weight": 1.0}], "hyperedges": []}

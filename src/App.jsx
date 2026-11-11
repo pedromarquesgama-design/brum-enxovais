@@ -138,7 +138,7 @@ export default function App() {
       />
 
       <main id="main-content" className="flex-1">
-        <Hero />
+        <Hero onSelectCategory={handleCategoryChange} />
 
         <CategoryStrip
           selectedCategory={selectedCategory}

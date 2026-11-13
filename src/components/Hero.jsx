@@ -1,64 +1,102 @@
 import { useEffect, useRef, useState } from 'react';
 import { HERO_SLIDES } from '../data/catalog';
+import { IconChevronLeft, IconChevronRight } from './Icons';
 
 const INTERVAL_MS = 6000;
 const SWIPE_THRESHOLD = 45;
 const DRAG_LOCK_THRESHOLD = 8;
+const WHEEL_THRESHOLD = 28;
+const WHEEL_COOLDOWN_MS = 520;
 
-// Posição dos botões (% da imagem) alinhada ao espaço vazio de cada arte.
+// Posição dos botões (% da arte) alinhada ao espaço vazio de cada banner.
 const CTAS = {
-  slide1: { label: 'Ver Banho', category: 'Banho', tone: 'dark', m: ['9.5%', '32%'], d: ['81%', '60.4%'] },
-  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'dark', m: ['8.6%', '25.9%'], d: ['5.4%', '59.4%'] },
-  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'dark', m: ['7.7%', '25.5%'], d: ['74%', '61.5%'] },
-  slide4: { label: 'Ver Coleção Cama', category: 'Cama', tone: 'gold', m: ['7%', '29.9%'], d: ['5.4%', '63.9%'] },
+  slide1: { label: 'Ver Banho', category: 'Banho', tone: 'dark', m: ['50%', '87.5%'], d: ['66%', '16%'] },
+  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'dark', m: ['50%', '87.5%'], d: ['5.4%', '58%'] },
+  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'gold', m: ['50%', '79%'], d: ['56%', '60%'] },
 };
 
 const TONES = {
-  dark: 'bg-primary-deep text-cream hover:bg-primary-strong',
-  gold: 'bg-[#dca74f] text-primary-strong hover:bg-[#cf983f]',
+  dark:
+    'bg-[linear-gradient(180deg,#2a5360_0%,#16333b_100%)] text-cream shadow-[0_1px_0_rgba(255,255,255,0.14)_inset,0_10px_24px_-8px_rgba(3,45,54,0.65)] hover:bg-[linear-gradient(180deg,#31606e_0%,#1c3e48_100%)] hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_16px_30px_-10px_rgba(3,45,54,0.6)]',
+  gold:
+    'bg-[linear-gradient(180deg,#e8bd70_0%,#d29a3f_100%)] text-primary-strong shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_10px_24px_-8px_rgba(108,68,0,0.55)] hover:bg-[linear-gradient(180deg,#f0c982_0%,#dca74f_100%)] hover:shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_16px_30px_-10px_rgba(108,68,0,0.5)]',
 };
 
 export default function Hero({ onSelectCategory }) {
-  const [slide, setSlide] = useState({ index: 0, from: null, dir: 0 });
+  const [index, setIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
   const gestureRef = useRef({ active: false, startX: 0, startY: 0, axis: null });
   const dragXRef = useRef(0);
   const swipedRef = useRef(false);
+  const wheelRef = useRef({ acc: 0, lockedUntil: 0 });
+
+  // No mobile cada arte é um vídeo 9:16; no desktop é a imagem 16:9.
+  const videoRefs = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   const count = HERO_SLIDES.length;
-  const activeIndex = slide.index;
-  const nextIndex = (activeIndex + 1) % count;
-  const prevIndex = (activeIndex - 1 + count) % count;
 
   useEffect(() => {
-    if (isDragging || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => {
+      setIsMobile(mobileQuery.matches);
+      setReduceMotion(motionQuery.matches);
+    };
+    sync();
+    mobileQuery.addEventListener('change', sync);
+    motionQuery.addEventListener('change', sync);
+    return () => {
+      mobileQuery.removeEventListener('change', sync);
+      motionQuery.removeEventListener('change', sync);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isDragging || reduceMotion) return undefined;
     const id = setTimeout(() => {
-      setSlide((s) => ({ index: (s.index + 1) % count, from: null, dir: 0 }));
+      setIndex((i) => (i + 1) % count);
     }, INTERVAL_MS);
     return () => clearTimeout(id);
-  }, [activeIndex, isDragging, count]);
+  }, [index, isDragging, count, reduceMotion]);
 
+  // Só o banner visível toca; os outros ficam pausados.
   useEffect(() => {
-    if (slide.from === null) return undefined;
-    const id = setTimeout(() => {
-      setSlide((s) => (s.from !== null ? { ...s, from: null, dir: 0 } : s));
-    }, 320);
-    return () => clearTimeout(id);
-  }, [slide.from]);
+    videoRefs.current.forEach((video, idx) => {
+      if (!video) return;
+      if (idx === index && !reduceMotion) {
+        video.play()?.catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [index, reduceMotion, isMobile]);
 
   const goTo = (category) => {
     onSelectCategory(category);
     document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const step = (delta, withSlide = false) => {
-    setSlide((s) => ({
-      index: (s.index + delta + count) % count,
-      from: withSlide ? s.index : null,
-      dir: withSlide ? delta : 0,
-    }));
+  const step = (delta) => {
+    setIndex((i) => (i + delta + count) % count);
+  };
+
+  const handleWheel = (e) => {
+    // Rolagem vertical continua sendo da página; só o eixo horizontal troca de slide.
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    const now = Date.now();
+    if (now < wheelRef.current.lockedUntil) return;
+
+    wheelRef.current.acc += e.deltaX;
+    if (Math.abs(wheelRef.current.acc) < WHEEL_THRESHOLD) return;
+
+    const dir = wheelRef.current.acc > 0 ? 1 : -1;
+    wheelRef.current.acc = 0;
+    wheelRef.current.lockedUntil = now + WHEEL_COOLDOWN_MS;
+    step(dir);
   };
 
   const beginGesture = (x, y) => {
@@ -102,8 +140,8 @@ export default function Hero({ onSelectCategory }) {
     setDragX(0);
 
     if (g.axis === 'x') {
-      if (finalDx <= -SWIPE_THRESHOLD) step(1, true);
-      else if (finalDx >= SWIPE_THRESHOLD) step(-1, true);
+      if (finalDx <= -SWIPE_THRESHOLD) step(1);
+      else if (finalDx >= SWIPE_THRESHOLD) step(-1);
       setTimeout(() => {
         swipedRef.current = false;
       }, 60);
@@ -122,6 +160,17 @@ export default function Hero({ onSelectCategory }) {
     else if (e.key === 'ArrowLeft') step(-1);
   };
 
+  // Deslocamento circular: -1 é o slide anterior, 0 o atual, 1 o próximo.
+  const offsetOf = (idx) => {
+    let offset = idx - index;
+    if (offset > count / 2) offset -= count;
+    if (offset < -count / 2) offset += count;
+    return offset;
+  };
+
+  const arrowClass =
+    'absolute top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-cream/90 text-primary-strong backdrop-blur-sm shadow-[0_8px_20px_-8px_rgba(3,45,54,0.55)] transition-[background-color,transform,box-shadow] duration-200 hover:bg-cream hover:shadow-[0_12px_26px_-10px_rgba(3,45,54,0.5)] active:scale-95 cursor-pointer';
+
   return (
     <section
       id="inicio"
@@ -130,6 +179,7 @@ export default function Hero({ onSelectCategory }) {
       className="relative w-full overflow-hidden bg-cream"
     >
       <div
+        onWheel={handleWheel}
         onTouchStart={(e) => e.touches[0] && beginGesture(e.touches[0].clientX, e.touches[0].clientY)}
         onTouchMove={(e) => e.touches[0] && moveGesture(e.touches[0].clientX, e.touches[0].clientY)}
         onTouchEnd={endGesture}
@@ -144,26 +194,14 @@ export default function Hero({ onSelectCategory }) {
         className="relative w-full aspect-[571/1024] md:aspect-[1024/571] [container-type:inline-size] touch-pan-y select-none cursor-grab active:cursor-grabbing"
       >
         {HERO_SLIDES.map((item, idx) => {
-          const isCurrent = idx === activeIndex;
-          const isLeaving = idx === slide.from;
-          const isNextPeek = isDragging && dragX < 0 && idx === nextIndex;
-          const isPrevPeek = isDragging && dragX > 0 && idx === prevIndex;
+          const isCurrent = idx === index;
+          const offset = offsetOf(idx);
           const cta = CTAS[item.id];
 
-          let transform = 'translateX(0px)';
-          if (isDragging) {
-            if (isCurrent) transform = `translateX(${dragX}px)`;
-            else if (isNextPeek) transform = `translateX(calc(100% + ${dragX}px))`;
-            else if (isPrevPeek) transform = `translateX(calc(-100% + ${dragX}px))`;
-          } else if (isLeaving && slide.dir !== 0) {
-            transform = `translateX(${-slide.dir * 100}%)`;
-          }
-
+          const transform = `translateX(calc(${offset * 100}% + ${dragX}px))`;
           const transitionClass = isDragging
             ? 'transition-none'
-            : slide.from !== null
-              ? 'transition-transform duration-300 ease-out'
-              : 'transition-opacity duration-700 ease-out';
+            : 'transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]';
 
           return (
             <div
@@ -171,32 +209,42 @@ export default function Hero({ onSelectCategory }) {
               aria-hidden={!isCurrent}
               style={{ transform }}
               className={`absolute inset-0 ${transitionClass} ${
-                isCurrent
-                  ? 'z-20 opacity-100'
-                  : isNextPeek || isPrevPeek
-                    ? 'z-20 opacity-100 pointer-events-none'
-                    : isLeaving
-                      ? 'z-10 opacity-100 pointer-events-none'
-                      : 'z-0 opacity-0 pointer-events-none'
+                isCurrent ? 'z-20' : 'z-10 pointer-events-none'
               }`}
             >
-              <picture>
-                <source media="(min-width: 768px)" srcSet={item.desktop} />
-                <img
+              {isMobile ? (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[idx] = el;
+                  }}
                   src={item.mobile}
+                  poster={item.poster}
+                  muted
+                  loop
+                  playsInline
+                  autoPlay={!reduceMotion}
+                  preload={idx === 0 ? 'auto' : 'metadata'}
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                />
+              ) : (
+                /* Os slides laterais começam fora da viewport, então lazy nunca carregaria a arte. */
+                <img
+                  src={item.desktop}
                   alt={isCurrent ? item.alt : ''}
-                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  loading="eager"
                   decoding="async"
                   draggable={false}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-              </picture>
+              )}
               <button
                 type="button"
                 tabIndex={isCurrent ? 0 : -1}
                 onClick={() => goTo(cta.category)}
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className={`absolute left-[var(--ml)] top-[var(--mt)] md:left-[var(--dl)] md:top-[var(--dt)] inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium shadow-sm transition-colors cursor-pointer active:scale-[0.98] h-[12.6cqw] px-[6cqw] text-[4.8cqw] md:h-[max(40px,4.2cqw)] md:px-[2.6cqw] md:text-[max(14px,1.5cqw)] ${TONES[cta.tone]}`}
+                className={`absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)] inline-flex items-center justify-center whitespace-nowrap rounded-full font-serif font-medium transition-[transform,box-shadow,background-color] duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] h-[12.6cqw] px-[6cqw] text-[4.8cqw] md:h-[max(40px,4.2cqw)] md:px-[2.6cqw] md:text-[max(14px,1.5cqw)] ${TONES[cta.tone]}`}
               >
                 {cta.label}
               </button>
@@ -204,28 +252,22 @@ export default function Hero({ onSelectCategory }) {
           );
         })}
 
-        <div
-          role="tablist"
-          aria-label="Selecionar destaque"
-          className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center justify-center gap-1 rounded-full bg-cream/80 backdrop-blur-xs px-2.5 shadow-xs"
+        <button
+          type="button"
+          aria-label="Destaque anterior"
+          onClick={() => step(-1)}
+          className={`${arrowClass} left-2 sm:left-4`}
         >
-          {HERO_SLIDES.map((item, idx) => {
-            const isActive = idx === activeIndex;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-label={`Ver destaque ${idx + 1}`}
-                onClick={() => setSlide({ index: idx, from: null, dir: 0 })}
-                className="py-2 px-1 flex items-center cursor-pointer"
-              >
-                <span className={`block h-2 rounded-full transition-all duration-300 ${isActive ? 'w-7 bg-primary' : 'w-2 bg-ink-muted/40'}`} />
-              </button>
-            );
-          })}
-        </div>
+          <IconChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Próximo destaque"
+          onClick={() => step(1)}
+          className={`${arrowClass} right-2 sm:right-4`}
+        >
+          <IconChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+        </button>
       </div>
     </section>
   );

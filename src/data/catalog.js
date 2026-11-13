@@ -1,12 +1,13 @@
 import PRODUCTS_DATA from './catalog-items.json';
-import heroMobile1 from '../assets/hero/hero-mobile-1.jpg';
-import heroMobile2 from '../assets/hero/hero-mobile-2.jpg';
-import heroMobile3 from '../assets/hero/hero-mobile-3.jpg';
-import heroMobile4 from '../assets/hero/hero-mobile-4.jpg';
-import heroDesktop1 from '../assets/hero/hero-desktop-1.jpg';
-import heroDesktop2 from '../assets/hero/hero-desktop-2.jpg';
-import heroDesktop3 from '../assets/hero/hero-desktop-3.jpg';
-import heroDesktop4 from '../assets/hero/hero-desktop-4.jpg';
+import heroDesktopBath from '../assets/hero/hero-desktop-bath.jpg';
+import heroMobileBath from '../assets/hero/hero-mobile-bath.mp4';
+import heroMobileBathPoster from '../assets/hero/hero-mobile-bath.jpg';
+import heroDesktopUtility from '../assets/hero/hero-desktop-utility.jpg';
+import heroMobileUtility from '../assets/hero/hero-mobile-utility.mp4';
+import heroMobileUtilityPoster from '../assets/hero/hero-mobile-utility.jpg';
+import heroDesktopTable from '../assets/hero/hero-desktop-table.jpg';
+import heroMobileTable from '../assets/hero/hero-mobile-table.mp4';
+import heroMobileTablePoster from '../assets/hero/hero-mobile-table.jpg';
 
 // Contatos abaixo são ilustrativos (fictícios) até substituição pelos oficiais da Brum Enxovais.
 export const STORE_INFO = {
@@ -30,11 +31,29 @@ export const STORE_INFO = {
   ],
 };
 
+// Cada destaque tem uma arte 16:9 para desktop e uma animação 9:16 para mobile.
 export const HERO_SLIDES = [
-  { id: 'slide1', mobile: heroMobile1, desktop: heroDesktop1, alt: 'Maciez para todo dia' },
-  { id: 'slide2', mobile: heroMobile2, desktop: heroDesktop2, alt: 'Utilidades que resolvem' },
-  { id: 'slide3', mobile: heroMobile3, desktop: heroDesktop3, alt: 'Mesa posta com charme' },
-  { id: 'slide4', mobile: heroMobile4, desktop: heroDesktop4, alt: 'Um quarto para descansar' },
+  {
+    id: 'slide1',
+    mobile: heroMobileBath,
+    poster: heroMobileBathPoster,
+    desktop: heroDesktopBath,
+    alt: 'Maciez para todo dia',
+  },
+  {
+    id: 'slide2',
+    mobile: heroMobileUtility,
+    poster: heroMobileUtilityPoster,
+    desktop: heroDesktopUtility,
+    alt: 'Praticidade para todo dia',
+  },
+  {
+    id: 'slide3',
+    mobile: heroMobileTable,
+    poster: heroMobileTablePoster,
+    desktop: heroDesktopTable,
+    alt: 'Mesa posta com charme',
+  },
 ];
 
 export const CATEGORIES = [

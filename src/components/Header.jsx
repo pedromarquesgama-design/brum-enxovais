@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { STORE_INFO } from '../data/catalog';
 import { IconBag, IconClose, IconHeart, IconMenu, IconSearch } from './Icons';
 
+const SHOW_AFTER_PX = 24;
+
 const NAV_LINKS = [
   { href: '#inicio', label: 'Início' },
   { href: '#categorias', label: 'Categorias' },
@@ -18,6 +20,20 @@ export default function Header({
   onOpenSearch,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navVisible, setNavVisible] = useState(
+    () => typeof window !== 'undefined' && window.scrollY > SHOW_AFTER_PX
+  );
+
+  // A barra fica recolhida no topo para o hero ocupar a tela inteira.
+  useEffect(() => {
+    const onScroll = () => {
+      const visible = window.scrollY > SHOW_AFTER_PX;
+      setNavVisible(visible);
+      if (!visible) setMobileOpen(false);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -29,7 +45,11 @@ export default function Header({
   }, [mobileOpen]);
 
   return (
-    <>
+    <div
+      className={`fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-out focus-within:translate-y-0 ${
+        navVisible ? 'translate-y-0 shadow-[0_12px_28px_-20px_rgba(3,45,54,0.5)]' : '-translate-y-full'
+      }`}
+    >
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-cream"
@@ -39,12 +59,12 @@ export default function Header({
 
       <div className="bg-primary-deep text-cream text-xs py-2 px-4 text-center border-b border-hairline-dark">
         <p className="max-w-7xl mx-auto leading-snug">
-          <span className="sm:hidden">Brum Enxovais · 1.428 itens · Orçamento via WhatsApp</span>
+          <span className="sm:hidden">Brum Enxovais - Mais de 1.500 itens!</span>
           <span className="hidden sm:inline">{STORE_INFO.announcement}</span>
         </p>
       </div>
 
-      <header className="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-hairline">
+      <header className="bg-cream/95 backdrop-blur-md border-b border-hairline">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-[74px] flex items-center justify-between gap-2 sm:gap-3">
           {/* Mobile menu toggle */}
           <div className="flex items-center lg:hidden shrink-0">
@@ -147,6 +167,6 @@ export default function Header({
           </nav>
         )}
       </header>
-    </>
+    </div>
   );
 }

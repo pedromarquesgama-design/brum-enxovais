@@ -191,7 +191,7 @@ export default function Hero({ onSelectCategory }) {
         onMouseUp={endGesture}
         onMouseLeave={endGesture}
         onClickCapture={handleClickCapture}
-        className="relative w-full aspect-[571/1024] md:aspect-[1024/571] [container-type:inline-size] touch-pan-y select-none cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[100svh] md:h-auto md:aspect-[1024/571] [container-type:inline-size] touch-pan-y select-none cursor-grab active:cursor-grabbing"
       >
         {HERO_SLIDES.map((item, idx) => {
           const isCurrent = idx === index;

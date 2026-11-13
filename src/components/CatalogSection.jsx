@@ -145,7 +145,7 @@ export default function CatalogSection({
             <button
               type="button"
               onClick={onResetFilters}
-              className="mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
+              className="btn-shine mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
             >
               Ver Todo o Catálogo
             </button>

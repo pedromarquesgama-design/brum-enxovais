@@ -244,7 +244,7 @@ export default function Hero({ onSelectCategory }) {
                 tabIndex={isCurrent ? 0 : -1}
                 onClick={() => goTo(cta.category)}
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className={`absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)] inline-flex items-center justify-center whitespace-nowrap rounded-full font-serif font-medium transition-[transform,box-shadow,background-color] duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] h-[12.6cqw] px-[6cqw] text-[4.8cqw] md:h-[max(40px,4.2cqw)] md:px-[2.6cqw] md:text-[max(14px,1.5cqw)] ${TONES[cta.tone]}`}
+                className={`absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)] inline-flex items-center justify-center whitespace-nowrap rounded-full font-serif font-medium transition-[transform,box-shadow,background-color] duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] h-[12.6cqw] px-[6cqw] text-[4.8cqw] md:h-[max(40px,4.2cqw)] md:px-[2.6cqw] md:text-[max(14px,1.5cqw)] btn-shine btn-shine-auto ${TONES[cta.tone]}`}
               >
                 {cta.label}
               </button>

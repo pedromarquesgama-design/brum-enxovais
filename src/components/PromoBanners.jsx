@@ -33,7 +33,7 @@ export default function PromoBanners({ onSelectCategory }) {
               <button
                 type="button"
                 onClick={() => jumpToCategory('Cama')}
-                className="inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-sm px-6 py-3 transition-colors"
+                className="btn-shine inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-sm px-6 py-3 transition-colors"
               >
                 <span>Ver Coleção Cama</span>
                 <IconArrowRight className="w-4 h-4" />
@@ -63,7 +63,7 @@ export default function PromoBanners({ onSelectCategory }) {
               <button
                 type="button"
                 onClick={() => jumpToCategory('Mesa')}
-                className="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm px-6 py-3 transition-colors"
+                className="btn-shine inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm px-6 py-3 transition-colors"
               >
                 <span>Ver Mesa Posta</span>
                 <IconArrowRight className="w-4 h-4" />

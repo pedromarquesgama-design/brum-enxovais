@@ -148,7 +148,7 @@ export default function ProductModal({
               href={buildWhatsAppUrl(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm py-3 px-5 inline-flex items-center justify-center gap-2 transition-colors"
+              className="btn-shine w-full rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm py-3 px-5 inline-flex items-center justify-center gap-2 transition-colors"
             >
               <IconWhatsApp className="w-4 h-4" />
               <span>Consultar no WhatsApp</span>

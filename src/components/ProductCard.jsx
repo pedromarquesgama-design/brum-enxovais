@@ -72,7 +72,7 @@ export default function ProductCard({
           <button
             type="button"
             onClick={() => onAddToCart(product)}
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-xs px-3.5 py-2 shrink-0 w-full sm:w-auto transition-colors"
+            className="btn-shine inline-flex items-center justify-center gap-1.5 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-xs px-3.5 py-2 shrink-0 w-full sm:w-auto transition-colors"
           >
             <IconPlus className="w-3.5 h-3.5" />
             <span>Orçar</span>

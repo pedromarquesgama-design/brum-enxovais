@@ -66,7 +66,7 @@ export default function WishlistDrawer({
               <a
                 href="#catalogo"
                 onClick={onClose}
-                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
+                className="btn-shine mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
               >
                 Explorar Catálogo
               </a>

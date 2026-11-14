@@ -5,7 +5,7 @@
 ## Platform & Stack
 - **Aplicação Web Responsiva (Catálogo Digital Completo & Orçamento):** React 19 (`^19.3.1`), Vite 8 (`^8.3.6`), Tailwind CSS v4 (`@tailwindcss/vite` `^4.3.5`).
 - **Idioma & Localidade:** Português brasileiro (`pt-BR`).
-- **Identidade Visual:** Definida em [`DESIGN.md`](./DESIGN.md) (*Atelier Brum*: petróleo `#032d36` / `#1f434d` / `#16333b`, âmbar mel `#fdae43` / `#f3a63b` / `#855300`, creme `#faf8f5`, linho `#f2eee8`, `Playfair Display` + `Inter`).
+- **Identidade Visual:** Definida em [`DESIGN.md`](./DESIGN.md) (*Atelier Brum*: petróleo `#032d36` / `#1f434d` / `#16333b`, âmbar mel `#fdae43` / `#f3a63b` / `#855300`, creme `#faf8f5`, linho `#f2eee8`, `Playfair Display` + `TikTok Sans`).
 
 ## Users
 - **Clientes de Varejo e Enxoval Residencial:** Pessoas montando ou renovando quartos, banheiros, cozinhas, áreas de convivência e rotinas domésticas.

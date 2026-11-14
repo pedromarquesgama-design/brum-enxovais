@@ -54,7 +54,7 @@ export default function CategoryStrip({ selectedCategory, onSelectCategory }) {
                 className="group flex flex-col items-center text-center shrink-0 w-32 sm:w-36 lg:w-auto snap-start focus-visible:rounded-2xl"
               >
                 <div
-                  className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-linen border-4 border-white transition-all duration-300 ${
+                  className={`btn-shine w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-linen border-4 border-white transition-all duration-300 ${
                     isSelected
                       ? 'ring-2 ring-primary ring-offset-2 ring-offset-cream shadow-md'
                       : 'ring-1 ring-ink/15 shadow-sm group-hover:ring-primary/50 group-hover:shadow-md'

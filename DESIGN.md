@@ -97,27 +97,27 @@ typography:
     fontWeight: '600'
     lineHeight: 28px
   body-lead:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 18px
     fontWeight: '400'
     lineHeight: 28px
   body-default:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 15px
     fontWeight: '400'
     lineHeight: 24px
   body-strong:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 15px
     fontWeight: '600'
     lineHeight: 24px
   caption:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 13px
     fontWeight: '400'
     lineHeight: 18px
   eyebrow-caps:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 11px
     fontWeight: '600'
     lineHeight: 14px
@@ -128,7 +128,7 @@ typography:
     fontWeight: '600'
     lineHeight: 32px
   price-sm:
-    fontFamily: Inter
+    fontFamily: TikTok Sans
     fontSize: 16px
     fontWeight: '600'
     lineHeight: 20px
@@ -179,10 +179,10 @@ The chromatic language is anchored in the deep, serene hue of artisanal petroleu
 
 ## Typography
 
-The typographic hierarchy pairs the literary grace of high-contrast display serif (`Playfair Display`) with the functional precision of `Inter`.
+The typographic hierarchy pairs the literary grace of high-contrast display serif (`Playfair Display`) with the functional precision of `TikTok Sans`.
 
 - **Playfair Display**: Evokes heirloom craftsmanship, weave density, and European boutique pedigree. Display styles employ deliberate tracking and generous vertical line heights to evoke an editorial magazine spread. It serves hero headlines, collection banners, product titles in featured tiers, and pricing callouts.
-- **Inter**: Governs all functional e-commerce interactions—swatches, descriptions, specs, checkout forms, filters, and dense tabular comparison matrices.
+- **TikTok Sans**: Governs all functional e-commerce interactions—swatches, descriptions, specs, checkout forms, filters, and dense tabular comparison matrices.
 - **Eyebrows & Micro-copy**: Rendered in uppercase with generous tracking (`0.12em`), referencing haute couture textile labeling and fabric blend stamps.
 
 ## Layout & Spacing
@@ -240,4 +240,4 @@ The design system adopts a **Pill-shaped (Level 3)** signature for interactive a
 - Floating label transitions gracefully to `11px` uppercase tracking above the value.
 
 ### Tabular Bed & Linen Specification Tables
-- Minimal hairlines with alternating linen-tinted rows (`#faf8f5`). Headers set in `Playfair Display` at `16px`, spec descriptors in `Inter 14px` neutral slate.
+- Minimal hairlines with alternating linen-tinted rows (`#faf8f5`). Headers set in `Playfair Display` at `16px`, spec descriptors in `TikTok Sans 14px` neutral slate.

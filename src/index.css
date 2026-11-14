@@ -80,49 +80,6 @@
   scrollbar-width: none;
 }
 
-@layer components {
-  /* Brilho que percorre os botões de CTA. */
-  .btn-shine {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-shine::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-      105deg,
-      transparent 38%,
-      rgba(255, 255, 255, 0.55) 50%,
-      transparent 62%
-    );
-    transform: translateX(-140%);
-    transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .btn-shine:hover::after,
-  .btn-shine:focus-visible::after {
-    transform: translateX(140%);
-  }
-
-  /* Nos CTAs do hero o brilho passa sozinho, sem depender do hover. */
-  .btn-shine-auto::after {
-    animation: btn-shine-sweep 5.2s ease-in-out infinite;
-  }
-
-  @keyframes btn-shine-sweep {
-    0%,
-    62% {
-      transform: translateX(-140%);
-    }
-    92%,
-    100% {
-      transform: translateX(140%);
-    }
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   html {

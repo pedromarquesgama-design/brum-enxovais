@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CATEGORIES, CATEGORY_COUNTS, PRODUCTS, STORE_INFO } from '../data/catalog';
 import { IconCheck, IconClose, IconSearch } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 const SORT_OPTIONS = [
   { id: 'default', label: 'Ordem do Acervo' },
@@ -211,23 +212,24 @@ export default function FilterSheet({
         </div>
 
         <div className="px-5 py-4 border-t border-hairline bg-cream flex items-center gap-3">
-          <button
-            type="button"
+          <RealismButton
+            tone="surface"
+            text="Limpar"
             onClick={handleReset}
-            className="flex-1 rounded-full bg-surface border border-hairline hover:bg-linen text-ink font-medium text-sm py-3 transition-colors"
-          >
-            Limpar
-          </button>
-          <button
-            type="button"
+            className="flex-1 [--shiny-btn-size:0.9rem]"
+          />
+          <RealismButton
+            text={
+              <>
+                <span>Aplicar Filtros</span>
+                <span className="min-w-[24px] h-6 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
+                  {draftMatchCount}
+                </span>
+              </>
+            }
             onClick={handleApply}
-            className="flex-[1.7] rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm py-3 px-4 inline-flex items-center justify-center gap-2 transition-colors shadow-xs"
-          >
-            <span>Aplicar Filtros</span>
-            <span className="min-w-[24px] h-6 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
-              {draftMatchCount}
-            </span>
-          </button>
+            className="flex-[1.7] [--shiny-btn-size:0.9rem]"
+          />
         </div>
       </div>
     </div>

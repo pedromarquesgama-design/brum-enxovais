@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { buildWhatsAppUrl } from '../data/catalog';
-import { IconBag, IconClose, IconHeart, IconMinus, IconPlus, IconWhatsApp } from './Icons';
+import { IconBag, IconClose, IconHeart, IconMinus, IconPlus } from './Icons';
+import ImageLightbox from './ui/image-lightbox';
+import RealismButton from './ui/shiny-borders-button';
 
 export default function ProductModal({
   product,
@@ -10,6 +12,7 @@ export default function ProductModal({
   onAddToCart,
 }) {
   const [quantity, setQuantity] = useState(1);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -32,40 +35,45 @@ export default function ProductModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-modal-title"
-        className="w-full max-w-4xl bg-surface rounded-3xl border border-hairline shadow-2xl overflow-hidden max-h-[92vh] flex flex-col md:flex-row"
+        className="relative w-full max-w-4xl bg-surface rounded-3xl border border-hairline shadow-2xl overflow-hidden max-h-[92vh] flex flex-col md:flex-row"
       >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar detalhes do produto"
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center shadow-sm transition-colors"
+        >
+          <IconClose className="w-4 h-4" />
+        </button>
+
         {/* Full uncropped product photography */}
         <div className="md:w-1/2 bg-white border-b md:border-b-0 md:border-r border-hairline p-4 flex items-center justify-center shrink-0">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full max-h-72 sm:max-h-96 md:max-h-[460px] object-contain"
-          />
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(true)}
+            aria-label={`Ampliar imagem de ${product.name}`}
+            className="cursor-zoom-in w-full"
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full max-h-72 sm:max-h-96 md:max-h-[460px] object-contain"
+            />
+          </button>
         </div>
 
         {/* Product details & quote actions */}
         <div className="md:w-1/2 p-5 sm:p-7 overflow-y-auto flex flex-col">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold text-accent-ink tabular-nums">
-                {product.category} · {product.sku}
-              </p>
-              <h2
-                id="product-modal-title"
-                className="mt-1 font-serif text-xl sm:text-2xl font-medium text-ink-strong leading-snug"
-              >
-                {product.name}
-              </h2>
-            </div>
-
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Fechar detalhes do produto"
-              className="w-9 h-9 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center shrink-0 transition-colors"
+          <div>
+            <p className="text-xs font-semibold text-accent-ink tabular-nums">
+              {product.category} · {product.sku}
+            </p>
+            <h2
+              id="product-modal-title"
+              className="mt-1 font-serif text-xl sm:text-2xl font-medium text-ink-strong leading-snug pr-10"
             >
-              <IconClose className="w-4 h-4" />
-            </button>
+              {product.name}
+            </h2>
           </div>
 
           <p className="mt-4 text-sm text-ink-muted leading-relaxed">
@@ -117,17 +125,18 @@ export default function ProductModal({
                 </button>
               </div>
 
-              <button
-                type="button"
+              <RealismButton
+                text={
+                  <>
+                    <IconBag className="w-4 h-4 inline-block align-middle" /> Adicionar
+                  </>
+                }
                 onClick={() => {
                   onAddToCart(product, quantity);
                   onClose();
                 }}
-                className="flex-1 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-sm py-3 px-4 inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors"
-              >
-                <IconBag className="w-4 h-4 shrink-0" />
-                <span>Adicionar à Lista</span>
-              </button>
+                className="flex-1 [--shiny-btn-size:0.85rem]"
+              />
 
               <button
                 type="button"
@@ -144,18 +153,24 @@ export default function ProductModal({
               </button>
             </div>
 
-            <a
+            <RealismButton
               href={buildWhatsAppUrl(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-shine w-full rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm py-3 px-5 inline-flex items-center justify-center gap-2 transition-colors"
-            >
-              <IconWhatsApp className="w-4 h-4" />
-              <span>Consultar no WhatsApp</span>
-            </a>
+              text="Consultar disponibilidade"
+              className="w-full font-serif [--shiny-btn-size:1rem]"
+            />
           </div>
         </div>
       </div>
+
+      {lightboxOpen && (
+        <ImageLightbox
+          src={product.image}
+          alt={product.name}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
     </div>
   );
 }

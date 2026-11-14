@@ -1,4 +1,5 @@
-import { IconHeart, IconPlus } from './Icons';
+import { IconBag, IconHeart } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 export default function ProductCard({
   product,
@@ -12,18 +13,18 @@ export default function ProductCard({
 
   return (
     <article className="group bg-surface rounded-2xl border border-hairline overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
-      <div className="relative aspect-square bg-white border-b border-hairline/60 p-2 overflow-hidden">
+      <div className="relative bg-white border-b border-hairline/60 overflow-hidden">
         <button
           type="button"
           onClick={() => onOpenDetail(product)}
           aria-label={`Ver detalhes de ${product.name}`}
-          className="block w-full h-full text-left"
+          className="block w-full text-left"
         >
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+            className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.03]"
           />
         </button>
 
@@ -60,23 +61,24 @@ export default function ProductCard({
 
         <p className="mt-1 text-xs text-ink-muted line-clamp-2">{subtitle}</p>
 
-        <div className="mt-auto pt-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-t border-hairline/80">
+        <div className="mt-auto pt-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-center items-center gap-2 border-t border-hairline/80">
           <button
             type="button"
             onClick={() => onOpenDetail(product)}
-            className="text-xs font-medium text-primary hover:text-primary-strong underline underline-offset-4 text-left"
+            className="text-xs font-medium text-primary hover:text-primary-strong text-center"
           >
             Ver detalhes
           </button>
 
-          <button
-            type="button"
+          <RealismButton
+            text={
+              <>
+                <IconBag className="w-3.5 h-3.5 inline-block align-middle" /> Adicionar
+              </>
+            }
             onClick={() => onAddToCart(product)}
-            className="btn-shine inline-flex items-center justify-center gap-1.5 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-xs px-3.5 py-2 shrink-0 w-full sm:w-auto transition-colors"
-          >
-            <IconPlus className="w-3.5 h-3.5" />
-            <span>Orçar</span>
-          </button>
+            className="w-full sm:w-auto shrink-0 [--shiny-btn-size:0.85rem]"
+          />
         </div>
       </div>
     </article>

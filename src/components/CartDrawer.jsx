@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { buildWhatsAppUrl } from '../data/catalog';
-import { IconBag, IconClose, IconMinus, IconPlus, IconTrash, IconWhatsApp } from './Icons';
+import { IconBag, IconClose, IconMinus, IconPlus, IconTrash } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 export default function CartDrawer({
   isOpen,
@@ -77,13 +78,12 @@ export default function CartDrawer({
               <p className="mt-1.5 text-sm text-ink-muted max-w-xs">
                 Selecione os produtos desejados no catálogo para consultar disponibilidade e valores diretamente pelo WhatsApp.
               </p>
-              <a
+              <RealismButton
                 href="#catalogo"
                 onClick={onClose}
-                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
-              >
-                Explorar Catálogo
-              </a>
+                text="Explorar Catálogo"
+                className="mt-5 font-serif [--shiny-btn-size:1.05rem]"
+              />
             </div>
           ) : (
             items.map((item) => (
@@ -158,15 +158,13 @@ export default function CartDrawer({
               </span>
             </div>
 
-            <a
+            <RealismButton
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-shine w-full rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm py-3.5 px-5 inline-flex items-center justify-center gap-2 transition-colors shadow-xs"
-            >
-              <IconWhatsApp className="w-4 h-4" />
-              <span>Solicitar Orçamento no WhatsApp</span>
-            </a>
+              text="Solicitar Orçamento no WhatsApp"
+              className="w-full font-serif [--shiny-btn-size:1rem]"
+            />
 
             <button
               type="button"

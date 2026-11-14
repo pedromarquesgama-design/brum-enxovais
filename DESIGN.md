@@ -218,7 +218,13 @@ The design system adopts a **Pill-shaped (Level 3)** signature for interactive a
 ## Components
 
 ### Buttons
-- **Primary Pill CTA**: Background `#1f434d` with `#ffffff` text, full pill geometry (`9999px`), padding `14px 28px`. Hover shifts to `#16333b` with a subtle `+1px` translateY lift.
+- **Shiny Action Button**: Every labelled action button on the site (CTAs, card actions, drawer/modal actions, filter actions) is rendered by `src/components/ui/shiny-borders-button.tsx` (`RealismButton`), so they all share one format: a `2px` pearlescent frame (`16px` outer radius) wrapping an inner plate (`14px` radius) that lifts by 10% on hover, with a soft gold halo behind the top-right corner. Only the colour palette changes per role, never the geometry.
+  - `primary` — deep petroleum plate (`#16333b` with a `#2c5661` sheen on the top-right) and cream `Playfair Display` text. Default for CTAs.
+  - `accent` — honey amber plate (`#f6c069` → `#e39c33`) with obsidian ink text.
+  - `surface` — milk white plate with a `#e6e2dc` hairline and ink text, for secondary actions.
+  - Text size and padding scale together through the `--shiny-btn-size` custom property (default `1.4rem`; `0.8rem`–`1rem` inside cards, drawers and modals).
+- **Icon Controls**: Search, favourites, cart, close and quantity steppers stay circular (`9999px`) — they are controls, not actions.
+- **Primary Pill CTA**: Background `#1f434d` with `#ffffff` text, full pill geometry (`9999px`), padding `14px 28px`. Hover shifts to `#16333b` with a subtle `+1px` translateY lift. Reserved for non-CTA utility surfaces.
 - **Artisan / Accent Button**: Filled with warm honey amber `#f3a63b` and neutral ink `#121b1e` text. Used exclusively for primary purchase triggers ("Comprar Agora", "Adicionar à Sacola").
 - **Secondary / Outline Pill**: Transparent fill, `1.5px solid #1f434d` border, text `#1f434d`. Hover fills with `slate-tint` (`#eef4f5`).
 - **Dark Track Pill**: Transparent with `1.5px solid #ffffff` or subtle amber outline, white text.

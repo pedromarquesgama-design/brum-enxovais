@@ -1,6 +1,7 @@
 import { CATEGORIES, CATEGORY_COUNTS } from '../data/catalog';
 import { IconClose, IconSearch, IconSliders } from './Icons';
 import ProductCard from './ProductCard';
+import RealismButton from './ui/shiny-borders-button';
 
 const CATEGORY_TABS = ['Todos', ...CATEGORIES.map((c) => c.id)];
 
@@ -79,19 +80,22 @@ export default function CatalogSection({
           </div>
 
           <div className="flex items-center gap-2.5">
-            <button
-              type="button"
+            <RealismButton
+              tone="surface"
+              text={
+                <>
+                  <IconSliders className="w-4 h-4 text-primary" />
+                  <span>Busca e Filtros</span>
+                  {activeFilterCount > 0 && (
+                    <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
+                      {activeFilterCount}
+                    </span>
+                  )}
+                </>
+              }
               onClick={onOpenFilterSheet}
-              className="inline-flex items-center gap-2 rounded-full bg-surface border border-hairline hover:border-primary/60 text-ink-strong text-xs sm:text-sm font-medium px-4 py-2.5 transition-colors shrink-0"
-            >
-              <IconSliders className="w-4 h-4 text-primary" />
-              <span>Busca e Filtros</span>
-              {activeFilterCount > 0 && (
-                <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
-                  {activeFilterCount}
-                </span>
-              )}
-            </button>
+              className="shrink-0 [--shiny-btn-size:0.85rem]"
+            />
 
             {(activeFilterCount > 0 || searchQuery) && (
               <button
@@ -142,13 +146,11 @@ export default function CatalogSection({
             <p className="mt-2 text-sm text-ink-muted">
               Não encontramos peças para os critérios selecionados. Tente outro termo de busca ou visualize todo o catálogo.
             </p>
-            <button
-              type="button"
+            <RealismButton
+              text="Ver Todo o Catálogo"
               onClick={onResetFilters}
-              className="btn-shine mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
-            >
-              Ver Todo o Catálogo
-            </button>
+              className="mt-5 font-serif [--shiny-btn-size:1.15rem]"
+            />
           </div>
         ) : (
           <>
@@ -179,13 +181,12 @@ export default function CatalogSection({
               </div>
 
               {displayedProducts.length < products.length && (
-                <button
-                  type="button"
+                <RealismButton
+                  tone="surface"
+                  text="Carregar Mais Produtos (+24)"
                   onClick={onShowMore}
-                  className="mt-5 inline-flex items-center justify-center rounded-full bg-surface hover:bg-primary hover:text-cream text-primary border border-primary/35 font-medium text-sm px-7 py-3 transition-colors shadow-2xs"
-                >
-                  Carregar Mais Produtos (+24)
-                </button>
+                  className="mt-5 [--shiny-btn-size:0.9rem]"
+                />
               )}
             </div>
           </>

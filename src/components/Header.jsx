@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { STORE_INFO } from '../data/catalog';
 import { IconBag, IconClose, IconHeart, IconMenu, IconSearch } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 const SHOW_AFTER_PX = 24;
 
@@ -132,18 +133,20 @@ export default function Header({
               )}
             </button>
 
-            <button
-              type="button"
+            <RealismButton
+              text={
+                <>
+                  <IconBag className="w-4 h-4 shrink-0" />
+                  <span className="hidden sm:inline">Orçamento</span>
+                  <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
+                    {cartCount}
+                  </span>
+                </>
+              }
               onClick={onOpenCart}
               aria-label={`Abrir lista de orçamento (${cartCount} ${cartCount === 1 ? 'item' : 'itens'})`}
-              className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-primary text-cream hover:bg-primary-strong px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors"
-            >
-              <IconBag className="w-4 h-4 shrink-0" />
-              <span className="hidden sm:inline">Orçamento</span>
-              <span className="min-w-[20px] h-5 px-1.5 rounded-full bg-accent text-ink-strong text-xs font-bold flex items-center justify-center tabular-nums">
-                {cartCount}
-              </span>
-            </button>
+              className="[--shiny-btn-size:0.85rem]"
+            />
           </div>
         </div>
 

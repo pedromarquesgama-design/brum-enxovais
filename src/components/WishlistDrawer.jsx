@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { IconClose, IconHeart, IconPlus, IconTrash } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 export default function WishlistDrawer({
   isOpen,
@@ -63,13 +64,12 @@ export default function WishlistDrawer({
               <p className="mt-1.5 text-sm text-ink-muted max-w-xs">
                 Toque no ícone de coração em qualquer peça do catálogo para salvar e consultar depois.
               </p>
-              <a
+              <RealismButton
                 href="#catalogo"
                 onClick={onClose}
-                className="btn-shine mt-5 inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary-strong text-cream text-sm font-medium px-6 py-3 transition-colors"
-              >
-                Explorar Catálogo
-              </a>
+                text="Explorar Catálogo"
+                className="mt-5 font-serif [--shiny-btn-size:1.05rem]"
+              />
             </div>
           ) : (
             products.map((product) => (
@@ -120,14 +120,15 @@ export default function WishlistDrawer({
                   </p>
 
                   <div className="mt-auto pt-2.5">
-                    <button
-                      type="button"
+                    <RealismButton
+                      text={
+                        <>
+                          <IconPlus className="w-3.5 h-3.5 inline-block align-middle" /> Adicionar ao Orçamento
+                        </>
+                      }
                       onClick={() => onMoveToCart(product)}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-xs px-3.5 py-1.5 transition-colors"
-                    >
-                      <IconPlus className="w-3.5 h-3.5" />
-                      <span>Adicionar ao Orçamento</span>
-                    </button>
+                      className="[--shiny-btn-size:0.8rem]"
+                    />
                   </div>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HERO_SLIDES } from '../data/catalog';
 import { IconChevronLeft, IconChevronRight } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 const INTERVAL_MS = 6000;
 const SWIPE_THRESHOLD = 45;
@@ -10,16 +11,9 @@ const WHEEL_COOLDOWN_MS = 520;
 
 // Posição dos botões (% da arte) alinhada ao espaço vazio de cada banner.
 const CTAS = {
-  slide1: { label: 'Ver Banho', category: 'Banho', tone: 'dark', m: ['50%', '87.5%'], d: ['66%', '16%'] },
-  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'dark', m: ['50%', '87.5%'], d: ['5.4%', '58%'] },
-  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'gold', m: ['50%', '79%'], d: ['56%', '60%'] },
-};
-
-const TONES = {
-  dark:
-    'bg-[linear-gradient(180deg,#2a5360_0%,#16333b_100%)] text-cream shadow-[0_1px_0_rgba(255,255,255,0.14)_inset,0_10px_24px_-8px_rgba(3,45,54,0.65)] hover:bg-[linear-gradient(180deg,#31606e_0%,#1c3e48_100%)] hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_16px_30px_-10px_rgba(3,45,54,0.6)]',
-  gold:
-    'bg-[linear-gradient(180deg,#e8bd70_0%,#d29a3f_100%)] text-primary-strong shadow-[0_1px_0_rgba(255,255,255,0.35)_inset,0_10px_24px_-8px_rgba(108,68,0,0.55)] hover:bg-[linear-gradient(180deg,#f0c982_0%,#dca74f_100%)] hover:shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_16px_30px_-10px_rgba(108,68,0,0.5)]',
+  slide1: { label: 'Ver Banho', category: 'Banho', m: ['50%', '87.5%'], d: ['66%', '16%'] },
+  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', m: ['50%', '87.5%'], d: ['5.4%', '58%'] },
+  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', m: ['50%', '79%'], d: ['56%', '60%'] },
 };
 
 export default function Hero({ onSelectCategory }) {
@@ -239,15 +233,17 @@ export default function Hero({ onSelectCategory }) {
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               )}
-              <button
-                type="button"
-                tabIndex={isCurrent ? 0 : -1}
-                onClick={() => goTo(cta.category)}
+              <div
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className={`absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)] inline-flex items-center justify-center whitespace-nowrap rounded-full font-serif font-medium transition-[transform,box-shadow,background-color] duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] h-[12.6cqw] px-[6cqw] text-[4.8cqw] md:h-[max(40px,4.2cqw)] md:px-[2.6cqw] md:text-[max(14px,1.5cqw)] btn-shine btn-shine-auto ${TONES[cta.tone]}`}
+                className="absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
               >
-                {cta.label}
-              </button>
+                <RealismButton
+                  text={cta.label}
+                  onClick={() => goTo(cta.category)}
+                  tabIndex={isCurrent ? 0 : -1}
+                  className="font-serif [--shiny-btn-size:1.15rem] md:[--shiny-btn-size:1rem]"
+                />
+              </div>
             </div>
           );
         })}

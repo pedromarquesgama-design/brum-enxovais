@@ -1,4 +1,4 @@
-import { IconArrowRight } from './Icons';
+import RealismButton from './ui/shiny-borders-button';
 
 export default function PromoBanners({ onSelectCategory }) {
   const jumpToCategory = (category) => {
@@ -30,14 +30,11 @@ export default function PromoBanners({ onSelectCategory }) {
             </div>
 
             <div className="relative z-10 mt-6">
-              <button
-                type="button"
+              <RealismButton
+                text="Ver Coleção Cama"
                 onClick={() => jumpToCategory('Cama')}
-                className="btn-shine inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-ink-strong font-semibold text-sm px-6 py-3 transition-colors"
-              >
-                <span>Ver Coleção Cama</span>
-                <IconArrowRight className="w-4 h-4" />
-              </button>
+                className="font-serif"
+              />
             </div>
           </div>
 
@@ -59,20 +56,17 @@ export default function PromoBanners({ onSelectCategory }) {
               </p>
             </div>
 
-            <div className="relative z-10 mt-6 flex flex-wrap gap-2.5">
-              <button
-                type="button"
+            <div className="relative z-10 mt-6 flex flex-wrap gap-2.5 items-center">
+              <RealismButton
+                text="Ver Mesa Posta"
                 onClick={() => jumpToCategory('Mesa')}
-                className="btn-shine inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary-strong text-cream font-medium text-sm px-6 py-3 transition-colors"
-              >
-                <span>Ver Mesa Posta</span>
-                <IconArrowRight className="w-4 h-4" />
-              </button>
+                className="font-serif"
+              />
 
               <button
                 type="button"
                 onClick={() => jumpToCategory('Panelas & Cozinha')}
-                className="inline-flex items-center justify-center rounded-full bg-surface hover:bg-cream text-primary border border-hairline font-medium text-sm px-5 py-3 transition-colors"
+                className="inline-flex items-center justify-center rounded-full bg-surface hover:bg-cream text-primary border border-hairline font-semibold text-sm px-5 py-3 shadow-md transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
               >
                 Cozinha &amp; Panelas
               </button>

@@ -220,6 +220,7 @@ The design system adopts a **Pill-shaped (Level 3)** signature for interactive a
 ### Buttons
 - **Shiny Action Button**: Every labelled action button on the site (CTAs, card actions, drawer/modal actions, filter actions) is rendered by `src/components/ui/shiny-borders-button.tsx` (`RealismButton`), so they all share one format: a `2px` pearlescent frame (`16px` outer radius) wrapping an inner plate (`14px` radius) that lifts by 10% on hover, with a soft gold halo behind the top-right corner. Only the colour palette changes per role, never the geometry.
   - `primary` — deep petroleum plate (`#1f434d`) with cream `Playfair Display` text and a pearl frame. Default for CTAs (hero, banners, drawers, header cart, product info).
+  - `cream` — off-white plate (`#ffffff` → `#f1ede6`) with obsidian ink text and a warm stone frame, used for the hero's "Mesa posta" CTA.
   - `accent` — honey amber plate (`#f6c069` → `#e39c33`) with obsidian ink text, used for the product card add-to-quote action.
   - `surface` — milk white plate with a `#e6e2dc` hairline and ink text, for secondary actions.
   - Text size and padding scale together through the `--shiny-btn-size` custom property (default `1.4rem`; `0.8rem`–`1rem` inside cards, drawers and modals).

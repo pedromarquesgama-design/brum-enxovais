@@ -219,7 +219,8 @@ The design system adopts a **Pill-shaped (Level 3)** signature for interactive a
 
 ### Buttons
 - **Shiny Action Button**: Every labelled action button on the site (CTAs, card actions, drawer/modal actions, filter actions) is rendered by `src/components/ui/shiny-borders-button.tsx` (`RealismButton`), so they all share one format: a `2px` pearlescent frame (`16px` outer radius) wrapping an inner plate (`14px` radius) that lifts by 10% on hover, with a soft gold halo behind the top-right corner. Only the colour palette changes per role, never the geometry.
-  - `primary` — deep petroleum plate (`#16333b` with a `#2c5661` sheen on the top-right) and cream `Playfair Display` text. Default for CTAs.
+  - `primary` — off-white plate (`#ffffff` → `#f1ede6`) with obsidian ink `Playfair Display` text and a warm stone frame. Default for CTAs, so they read on both the cream canvas and the dark editorial photography.
+  - `green` — deep petroleum plate (`#1f434d`) with cream text, used where the interface itself carries the selected/active state (filter sheet confirm button).
   - `accent` — honey amber plate (`#f6c069` → `#e39c33`) with obsidian ink text.
   - `surface` — milk white plate with a `#e6e2dc` hairline and ink text, for secondary actions.
   - Text size and padding scale together through the `--shiny-btn-size` custom property (default `1.4rem`; `0.8rem`–`1rem` inside cards, drawers and modals).

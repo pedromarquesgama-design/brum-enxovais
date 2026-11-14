@@ -168,13 +168,14 @@ export default function FilterSheet({
                     type="button"
                     onClick={() => setDraftSort(option.id)}
                     aria-pressed={selected}
-                    className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium border text-left transition-colors ${
+                    className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium border flex items-center justify-between gap-2 transition-colors ${
                       selected
-                        ? 'bg-primary-soft border-primary text-primary font-semibold'
+                        ? 'bg-primary border-primary text-cream font-semibold'
                         : 'bg-surface border-hairline text-ink hover:bg-cream'
                     }`}
                   >
-                    {option.label}
+                    <span className="truncate">{option.label}</span>
+                    {selected && <IconCheck className="w-4 h-4 shrink-0 text-accent" />}
                   </button>
                 );
               })}
@@ -219,6 +220,7 @@ export default function FilterSheet({
             className="flex-1 [--shiny-btn-size:0.9rem]"
           />
           <RealismButton
+            tone="green"
             text={
               <>
                 <span>Aplicar Filtros</span>

@@ -26,7 +26,7 @@ export default function ContactSection() {
             href={buildWhatsAppUrl('Olá, Brum Enxovais! Gostaria de falar com o atendimento.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline hover:border-primary/50 transition-colors"
+            className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline pointer-fine:hover:border-primary/50 transition-colors"
           >
             <div className="w-11 h-11 rounded-full bg-primary-soft text-primary flex items-center justify-center shrink-0">
               <IconPhone className="w-5 h-5" />
@@ -42,7 +42,7 @@ export default function ContactSection() {
 
           <a
             href={`mailto:${STORE_INFO.email}`}
-            className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline hover:border-primary/50 transition-colors"
+            className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline pointer-fine:hover:border-primary/50 transition-colors"
           >
             <div className="w-11 h-11 rounded-full bg-accent-soft text-accent-ink flex items-center justify-center shrink-0">
               <IconMail className="w-5 h-5" />

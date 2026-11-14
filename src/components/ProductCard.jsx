@@ -12,7 +12,7 @@ export default function ProductCard({
     [product.material, product.dimensions].filter(Boolean).join(' · ') || product.details;
 
   return (
-    <article className="group bg-surface rounded-2xl border border-hairline overflow-hidden flex flex-col transition-all duration-300 hover:shadow-md hover:-translate-y-0.5">
+    <article className="group bg-surface rounded-2xl border border-hairline overflow-hidden flex flex-col transition-all duration-300 pointer-fine:hover:shadow-md pointer-fine:hover:-translate-y-0.5">
       <div className="relative bg-white border-b border-hairline/60 overflow-hidden">
         <button
           type="button"
@@ -24,7 +24,7 @@ export default function ProductCard({
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.03]"
+            className="w-full h-auto transition-transform duration-500 pointer-fine:group-hover:scale-[1.03]"
           />
         </button>
 
@@ -36,7 +36,7 @@ export default function ProductCard({
           className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-9 h-9 rounded-full flex items-center justify-center border transition-colors shadow-2xs ${
             isWishlisted
               ? 'bg-primary text-cream border-primary'
-              : 'bg-surface/95 text-ink hover:text-primary border-hairline/80'
+              : 'bg-surface/95 text-ink pointer-fine:hover:text-primary border-hairline/80'
           }`}
         >
           <IconHeart className="w-4 h-4" filled={isWishlisted} />
@@ -53,7 +53,7 @@ export default function ProductCard({
           <button
             type="button"
             onClick={() => onOpenDetail(product)}
-            className="text-left hover:text-primary transition-colors"
+            className="text-left pointer-fine:hover:text-primary transition-colors"
           >
             {product.name}
           </button>
@@ -65,7 +65,7 @@ export default function ProductCard({
           <button
             type="button"
             onClick={() => onOpenDetail(product)}
-            className="text-xs font-medium text-primary hover:text-primary-strong text-center"
+            className="text-xs font-medium text-primary pointer-fine:hover:text-primary-strong text-center"
           >
             Ver detalhes
           </button>

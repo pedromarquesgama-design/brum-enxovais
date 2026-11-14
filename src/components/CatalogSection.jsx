@@ -72,7 +72,7 @@ export default function CatalogSection({
                 type="button"
                 onClick={() => onSearchChange('')}
                 aria-label="Limpar busca"
-                className="absolute inset-y-0 right-2.5 flex items-center px-1.5 text-ink-muted hover:text-ink-strong"
+                className="absolute inset-y-0 right-2.5 flex items-center px-1.5 text-ink-muted pointer-fine:hover:text-ink-strong"
               >
                 <IconClose className="w-4 h-4" />
               </button>
@@ -101,7 +101,7 @@ export default function CatalogSection({
               <button
                 type="button"
                 onClick={onResetFilters}
-                className="text-xs sm:text-sm font-medium text-accent-ink hover:text-primary underline underline-offset-4 px-1"
+                className="text-xs sm:text-sm font-medium text-accent-ink pointer-fine:hover:text-primary underline underline-offset-4 px-1"
               >
                 Limpar filtros
               </button>
@@ -128,7 +128,7 @@ export default function CatalogSection({
                 className={`rounded-full px-4 py-2 text-xs sm:text-sm font-medium whitespace-nowrap transition-colors tabular-nums ${
                   isSelected
                     ? 'bg-primary text-cream shadow-xs'
-                    : 'bg-surface border border-hairline text-ink-muted hover:text-ink-strong hover:bg-linen'
+                    : 'bg-surface border border-hairline text-ink-muted pointer-fine:hover:text-ink-strong pointer-fine:hover:bg-linen'
                 }`}
               >
                 {category} ({count})

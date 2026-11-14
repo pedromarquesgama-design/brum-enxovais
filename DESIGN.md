@@ -185,7 +185,16 @@ The typographic hierarchy pairs the literary grace of high-contrast display seri
 - **TikTok Sans**: Governs all functional e-commerce interactions—swatches, descriptions, specs, checkout forms, filters, and dense tabular comparison matrices.
 - **Eyebrows & Micro-copy**: Rendered in uppercase with generous tracking (`0.12em`), referencing haute couture textile labeling and fabric blend stamps.
 
-## Layout & Spacing
+## Motion
+
+- **Motion for React** (`motion/react`) drives every overlay: `AnimatePresence` handles enter/exit, `MotionConfig reducedMotion="user"` honours the OS preference.
+- **Filter sheet & product modal**: backdrop fades in `0.18s` while the panel springs up (`stiffness 360–380`, `damping 30–32`) from `y: 48` / `scale: 0.96`.
+- **Product image zoom**: the modal measures the thumbnail, then the lightbox grows the photo out of that exact rectangle (FLIP on `x/y/scale`) — inside → outside — and shrinks back into it on close.
+- **Mobile menu**: the three bars morph into an X (rotate + fade on SVG lines) while the drawer expands with `height: auto` and staggered links.
+- **Tap feedback**: `whileTap` scales icon buttons (search, favourites, menu, close) to `0.88–0.9`.
+- **Hover is desktop-only**: every `hover:` utility is scoped with `pointer-fine:`, so touch devices never trigger the sticky hover states.
+
+
 
 The layout is built upon an 8pt modular rhythm structured within an editorial 12-column grid.
 

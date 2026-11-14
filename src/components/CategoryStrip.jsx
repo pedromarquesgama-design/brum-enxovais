@@ -33,7 +33,7 @@ export default function CategoryStrip({ selectedCategory, onSelectCategory }) {
             <button
               type="button"
               onClick={() => handleSelect('Todos')}
-              className="self-start sm:self-auto text-xs sm:text-sm font-semibold text-accent-ink hover:text-primary underline underline-offset-4"
+              className="self-start sm:self-auto text-xs sm:text-sm font-semibold text-accent-ink pointer-fine:hover:text-primary underline underline-offset-4"
             >
               Mostrar todos os departamentos
             </button>
@@ -57,20 +57,20 @@ export default function CategoryStrip({ selectedCategory, onSelectCategory }) {
                   className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-linen border-4 border-white transition-all duration-300 ${
                     isSelected
                       ? 'ring-2 ring-primary ring-offset-2 ring-offset-cream shadow-md'
-                      : 'ring-1 ring-ink/15 shadow-sm group-hover:ring-primary/50 group-hover:shadow-md'
+                      : 'ring-1 ring-ink/15 shadow-sm pointer-fine:group-hover:ring-primary/50 pointer-fine:group-hover:shadow-md'
                   }`}
                 >
                   <img
                     src={category.image}
                     alt={category.alt}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 pointer-fine:group-hover:scale-105"
                   />
                 </div>
 
                 <span
                   className={`mt-3 text-sm font-medium leading-tight transition-colors ${
-                    isSelected ? 'text-primary font-semibold' : 'text-ink-strong group-hover:text-primary'
+                    isSelected ? 'text-primary font-semibold' : 'text-ink-strong pointer-fine:group-hover:text-primary'
                   }`}
                 >
                   {category.title}

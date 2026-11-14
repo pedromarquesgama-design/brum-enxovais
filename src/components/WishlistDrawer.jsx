@@ -46,7 +46,7 @@ export default function WishlistDrawer({
             type="button"
             onClick={onClose}
             aria-label="Fechar favoritos"
-            className="w-9 h-9 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center transition-colors"
+            className="w-9 h-9 rounded-full bg-linen pointer-fine:hover:bg-hairline text-ink flex items-center justify-center transition-colors"
           >
             <IconClose className="w-4 h-4" />
           </button>
@@ -100,7 +100,7 @@ export default function WishlistDrawer({
                         onClose();
                         onOpenDetail(product);
                       }}
-                      className="text-left text-sm font-medium text-ink-strong hover:text-primary leading-snug line-clamp-2"
+                      className="text-left text-sm font-medium text-ink-strong pointer-fine:hover:text-primary leading-snug line-clamp-2"
                     >
                       {product.name}
                     </button>
@@ -109,7 +109,7 @@ export default function WishlistDrawer({
                       type="button"
                       onClick={() => onRemoveWishlist(product.id)}
                       aria-label={`Remover ${product.name} dos favoritos`}
-                      className="text-ink-muted hover:text-ink-strong p-1 shrink-0"
+                      className="text-ink-muted pointer-fine:hover:text-ink-strong p-1 shrink-0"
                     >
                       <IconTrash className="w-4 h-4" />
                     </button>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { AnimatePresence } from 'motion/react';
 import AboutSection from './components/AboutSection';
 import CartDrawer from './components/CartDrawer';
 import CatalogSection from './components/CatalogSection';
@@ -175,26 +176,31 @@ export default function App() {
 
       <Footer onSelectCategory={handleCategoryChange} />
 
-      {isFilterSheetOpen && (
-        <FilterSheet
-          onClose={() => setIsFilterSheetOpen(false)}
-          initialQuery={searchQuery}
-          initialCategory={selectedCategory}
-          initialSort={sortBy}
-          onApply={handleApplySheet}
-        />
-      )}
+      <AnimatePresence>
+        {isFilterSheetOpen && (
+          <FilterSheet
+            key="filter-sheet"
+            onClose={() => setIsFilterSheetOpen(false)}
+            initialQuery={searchQuery}
+            initialCategory={selectedCategory}
+            initialSort={sortBy}
+            onApply={handleApplySheet}
+          />
+        )}
+      </AnimatePresence>
 
-      {activeProduct && (
-        <ProductModal
-          key={activeProduct.id}
-          product={activeProduct}
-          onClose={() => setActiveProduct(null)}
-          isWishlisted={wishlistIds.includes(activeProduct.id)}
-          onToggleWishlist={handleToggleWishlist}
-          onAddToCart={handleAddToCart}
-        />
-      )}
+      <AnimatePresence>
+        {activeProduct && (
+          <ProductModal
+            key="product-modal"
+            product={activeProduct}
+            onClose={() => setActiveProduct(null)}
+            isWishlisted={wishlistIds.includes(activeProduct.id)}
+            onToggleWishlist={handleToggleWishlist}
+            onAddToCart={handleAddToCart}
+          />
+        )}
+      </AnimatePresence>
 
       <CartDrawer
         isOpen={isCartOpen}

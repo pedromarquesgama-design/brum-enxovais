@@ -60,7 +60,7 @@ export default function CartDrawer({
             type="button"
             onClick={onClose}
             aria-label="Fechar lista de orçamento"
-            className="w-9 h-9 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center transition-colors"
+            className="w-9 h-9 rounded-full bg-linen pointer-fine:hover:bg-hairline text-ink flex items-center justify-center transition-colors"
           >
             <IconClose className="w-4 h-4" />
           </button>
@@ -106,7 +106,7 @@ export default function CartDrawer({
                       type="button"
                       onClick={() => onRemoveItem(item.product.id)}
                       aria-label={`Remover ${item.product.name}`}
-                      className="text-ink-muted hover:text-ink-strong p-1"
+                      className="text-ink-muted pointer-fine:hover:text-ink-strong p-1"
                     >
                       <IconTrash className="w-4 h-4" />
                     </button>
@@ -122,7 +122,7 @@ export default function CartDrawer({
                         type="button"
                         onClick={() => onUpdateQty(item.product.id, item.qty - 1)}
                         aria-label="Diminuir quantidade"
-                        className="w-7 h-7 rounded-full hover:bg-linen flex items-center justify-center text-ink"
+                        className="w-7 h-7 rounded-full pointer-fine:hover:bg-linen flex items-center justify-center text-ink"
                       >
                         <IconMinus className="w-3 h-3" />
                       </button>
@@ -133,7 +133,7 @@ export default function CartDrawer({
                         type="button"
                         onClick={() => onUpdateQty(item.product.id, item.qty + 1)}
                         aria-label="Aumentar quantidade"
-                        className="w-7 h-7 rounded-full hover:bg-linen flex items-center justify-center text-ink"
+                        className="w-7 h-7 rounded-full pointer-fine:hover:bg-linen flex items-center justify-center text-ink"
                       >
                         <IconPlus className="w-3 h-3" />
                       </button>
@@ -169,7 +169,7 @@ export default function CartDrawer({
             <button
               type="button"
               onClick={onClearCart}
-              className="w-full text-xs font-medium text-ink-muted hover:text-ink-strong underline underline-offset-4 py-1"
+              className="w-full text-xs font-medium text-ink-muted pointer-fine:hover:text-ink-strong underline underline-offset-4 py-1"
             >
               Limpar lista
             </button>

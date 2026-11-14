@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { buildWhatsAppUrl } from '../data/catalog';
 import { IconBag, IconClose, IconHeart, IconMinus, IconPlus } from './Icons';
 import ImageLightbox from './ui/image-lightbox';
@@ -13,6 +14,25 @@ export default function ProductModal({
 }) {
   const [quantity, setQuantity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [origin, setOrigin] = useState(null);
+  const thumbRef = useRef(null);
+
+  // Mede a área real da foto na miniatura para a imagem crescer de dentro para fora.
+  const openLightbox = () => {
+    const img = thumbRef.current;
+    if (!img) return;
+    const rect = img.getBoundingClientRect();
+    const ratio = img.naturalWidth / img.naturalHeight || 1;
+    const width = Math.min(rect.width, rect.height * ratio);
+    const height = Math.min(rect.height, rect.width / ratio);
+    setOrigin({
+      left: rect.left + (rect.width - width) / 2,
+      top: rect.top + (rect.height - height) / 2,
+      width,
+      height,
+    });
+    setLightboxOpen(true);
+  };
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -25,23 +45,31 @@ export default function ProductModal({
   const whatsappMessage = `Olá, Brum Enxovais! Gostaria de solicitar orçamento e disponibilidade para:\n• ${product.name} (${product.sku})\n• Departamento: ${product.category}\n• Quantidade: ${quantity}`;
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-ink-strong/60 backdrop-blur-xs"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div
+      <motion.div
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-modal-title"
         className="relative w-full max-w-4xl bg-surface rounded-3xl border border-hairline shadow-2xl overflow-hidden max-h-[92vh] flex flex-col md:flex-row"
+        initial={{ opacity: 0, y: 28, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        transition={{ type: 'spring', stiffness: 360, damping: 30 }}
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Fechar detalhes do produto"
-          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center shadow-sm transition-colors"
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-linen pointer-fine:hover:bg-hairline text-ink flex items-center justify-center shadow-sm transition-colors"
         >
           <IconClose className="w-4 h-4" />
         </button>
@@ -50,11 +78,12 @@ export default function ProductModal({
         <div className="md:w-1/2 bg-white border-b md:border-b-0 md:border-r border-hairline p-4 flex items-center justify-center shrink-0">
           <button
             type="button"
-            onClick={() => setLightboxOpen(true)}
+            onClick={openLightbox}
             aria-label={`Ampliar imagem de ${product.name}`}
             className="cursor-zoom-in w-full"
           >
             <img
+              ref={thumbRef}
               src={product.image}
               alt={product.name}
               className="w-full max-h-72 sm:max-h-96 md:max-h-[460px] object-contain"
@@ -108,7 +137,7 @@ export default function ProductModal({
                   type="button"
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   aria-label="Diminuir quantidade"
-                  className="w-8 h-8 rounded-full hover:bg-surface flex items-center justify-center text-ink"
+                  className="w-8 h-8 rounded-full pointer-fine:hover:bg-surface flex items-center justify-center text-ink"
                 >
                   <IconMinus className="w-3.5 h-3.5" />
                 </button>
@@ -119,7 +148,7 @@ export default function ProductModal({
                   type="button"
                   onClick={() => setQuantity((q) => q + 1)}
                   aria-label="Aumentar quantidade"
-                  className="w-8 h-8 rounded-full hover:bg-surface flex items-center justify-center text-ink"
+                  className="w-8 h-8 rounded-full pointer-fine:hover:bg-surface flex items-center justify-center text-ink"
                 >
                   <IconPlus className="w-3.5 h-3.5" />
                 </button>
@@ -146,7 +175,7 @@ export default function ProductModal({
                 className={`w-11 h-11 rounded-full border flex items-center justify-center shrink-0 transition-colors ${
                   isWishlisted
                     ? 'bg-primary text-cream border-primary'
-                    : 'bg-surface border-hairline text-ink hover:border-primary'
+                    : 'bg-surface border-hairline text-ink pointer-fine:hover:border-primary'
                 }`}
               >
                 <IconHeart className="w-4 h-4" filled={isWishlisted} />
@@ -162,15 +191,19 @@ export default function ProductModal({
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {lightboxOpen && (
-        <ImageLightbox
-          src={product.image}
-          alt={product.name}
-          onClose={() => setLightboxOpen(false)}
-        />
-      )}
-    </div>
+      <AnimatePresence>
+        {lightboxOpen && origin && (
+          <ImageLightbox
+            key="lightbox"
+            origin={origin}
+            src={product.image}
+            alt={product.name}
+            onClose={() => setLightboxOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

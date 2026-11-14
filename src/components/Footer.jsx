@@ -41,21 +41,21 @@ export default function Footer({ onSelectCategory }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar no WhatsApp"
-                className="w-10 h-10 rounded-full bg-primary hover:bg-accent hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary pointer-fine:hover:bg-accent pointer-fine:hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
               >
                 <IconWhatsApp className="w-4 h-4" />
               </a>
               <a
                 href={`mailto:${STORE_INFO.email}`}
                 aria-label="Enviar e-mail"
-                className="w-10 h-10 rounded-full bg-primary hover:bg-accent hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary pointer-fine:hover:bg-accent pointer-fine:hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
               >
                 <IconMail className="w-4 h-4" />
               </a>
               <a
                 href={`tel:${STORE_INFO.whatsappDigits}`}
                 aria-label="Ligar para atendimento"
-                className="w-10 h-10 rounded-full bg-primary hover:bg-accent hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary pointer-fine:hover:bg-accent pointer-fine:hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
               >
                 <IconPhone className="w-4 h-4" />
               </a>
@@ -72,7 +72,7 @@ export default function Footer({ onSelectCategory }) {
                     <button
                       type="button"
                       onClick={() => goToCategory(category.id)}
-                      className="hover:text-accent transition-colors text-left"
+                      className="pointer-fine:hover:text-accent transition-colors text-left"
                     >
                       {category.title}
                     </button>
@@ -85,27 +85,27 @@ export default function Footer({ onSelectCategory }) {
               <h3 className="text-sm font-semibold text-cream mb-3.5">Navegação</h3>
               <ul className="space-y-2.5 text-sm text-cream/80">
                 <li>
-                  <a href="#inicio" className="hover:text-accent transition-colors">
+                  <a href="#inicio" className="pointer-fine:hover:text-accent transition-colors">
                     Início
                   </a>
                 </li>
                 <li>
-                  <a href="#categorias" className="hover:text-accent transition-colors">
+                  <a href="#categorias" className="pointer-fine:hover:text-accent transition-colors">
                     Categorias
                   </a>
                 </li>
                 <li>
-                  <a href="#catalogo" className="hover:text-accent transition-colors">
+                  <a href="#catalogo" className="pointer-fine:hover:text-accent transition-colors">
                     Catálogo Completo
                   </a>
                 </li>
                 <li>
-                  <a href="#qualidade" className="hover:text-accent transition-colors">
+                  <a href="#qualidade" className="pointer-fine:hover:text-accent transition-colors">
                     Curadoria e Qualidade
                   </a>
                 </li>
                 <li>
-                  <a href="#contato" className="hover:text-accent transition-colors">
+                  <a href="#contato" className="pointer-fine:hover:text-accent transition-colors">
                     Fale Conosco
                   </a>
                 </li>
@@ -136,7 +136,7 @@ export default function Footer({ onSelectCategory }) {
                     <button
                       type="button"
                       onClick={() => goToCategory(category.id)}
-                      className="hover:text-accent text-left"
+                      className="pointer-fine:hover:text-accent text-left"
                     >
                       {category.title}
                     </button>
@@ -151,11 +151,11 @@ export default function Footer({ onSelectCategory }) {
                 <IconChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
               </summary>
               <ul className="pt-2 pb-1 space-y-2 text-sm text-cream/80">
-                <li><a href="#inicio" className="hover:text-accent">Início</a></li>
-                <li><a href="#categorias" className="hover:text-accent">Categorias</a></li>
-                <li><a href="#catalogo" className="hover:text-accent">Catálogo</a></li>
-                <li><a href="#qualidade" className="hover:text-accent">Curadoria</a></li>
-                <li><a href="#contato" className="hover:text-accent">Contato</a></li>
+                <li><a href="#inicio" className="pointer-fine:hover:text-accent">Início</a></li>
+                <li><a href="#categorias" className="pointer-fine:hover:text-accent">Categorias</a></li>
+                <li><a href="#catalogo" className="pointer-fine:hover:text-accent">Catálogo</a></li>
+                <li><a href="#qualidade" className="pointer-fine:hover:text-accent">Curadoria</a></li>
+                <li><a href="#contato" className="pointer-fine:hover:text-accent">Contato</a></li>
               </ul>
             </details>
 

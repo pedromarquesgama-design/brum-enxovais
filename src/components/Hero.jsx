@@ -163,7 +163,7 @@ export default function Hero({ onSelectCategory }) {
   };
 
   const arrowClass =
-    'absolute top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-cream/90 text-primary-strong backdrop-blur-sm shadow-[0_8px_20px_-8px_rgba(3,45,54,0.55)] transition-[background-color,transform,box-shadow] duration-200 hover:bg-cream hover:shadow-[0_12px_26px_-10px_rgba(3,45,54,0.5)] active:scale-95 cursor-pointer';
+    'absolute top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-cream/90 text-primary-strong backdrop-blur-sm shadow-[0_8px_20px_-8px_rgba(3,45,54,0.55)] transition-[background-color,transform,box-shadow] duration-200 pointer-fine:hover:bg-cream pointer-fine:hover:shadow-[0_12px_26px_-10px_rgba(3,45,54,0.5)] active:scale-95 cursor-pointer';
 
   return (
     <section

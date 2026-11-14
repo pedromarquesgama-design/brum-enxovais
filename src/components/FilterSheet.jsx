@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 import { CATEGORIES, CATEGORY_COUNTS, PRODUCTS, STORE_INFO } from '../data/catalog';
 import { IconCheck, IconClose, IconSearch } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
@@ -67,17 +68,25 @@ export default function FilterSheet({
   };
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-ink-strong/55 backdrop-blur-xs"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div
+      <motion.div
         role="dialog"
         aria-modal="true"
         aria-labelledby="filter-sheet-title"
         className="w-full sm:max-w-lg bg-surface rounded-t-[28px] sm:rounded-3xl border border-hairline shadow-2xl max-h-[90vh] flex flex-col overflow-hidden"
+        initial={{ opacity: 0, y: 48, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 32, scale: 0.98 }}
+        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
       >
         <div className="pt-3 pb-1 flex justify-center sm:hidden">
           <div className="w-10 h-1 rounded-full bg-hairline" />
@@ -99,7 +108,7 @@ export default function FilterSheet({
             <button
               type="button"
               onClick={handleReset}
-              className="text-xs font-semibold text-accent-ink hover:text-primary"
+              className="text-xs font-semibold text-accent-ink pointer-fine:hover:text-primary"
             >
               Limpar Tudo
             </button>
@@ -107,7 +116,7 @@ export default function FilterSheet({
               type="button"
               onClick={onClose}
               aria-label="Fechar filtros"
-              className="w-8 h-8 rounded-full bg-linen hover:bg-hairline text-ink flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-linen pointer-fine:hover:bg-hairline text-ink flex items-center justify-center transition-colors"
             >
               <IconClose className="w-4 h-4" />
             </button>
@@ -133,7 +142,7 @@ export default function FilterSheet({
                   type="button"
                   onClick={() => setDraftQuery('')}
                   aria-label="Apagar termo pesquisado"
-                  className="absolute inset-y-0 right-3 flex items-center text-ink-muted hover:text-ink-strong"
+                  className="absolute inset-y-0 right-3 flex items-center text-ink-muted pointer-fine:hover:text-ink-strong"
                 >
                   <IconClose className="w-4 h-4" />
                 </button>
@@ -148,7 +157,7 @@ export default function FilterSheet({
                     key={term}
                     type="button"
                     onClick={() => setDraftQuery(term)}
-                    className="rounded-full bg-linen hover:bg-hairline text-ink text-xs font-medium px-3 py-1.5 transition-colors"
+                    className="rounded-full bg-linen pointer-fine:hover:bg-hairline text-ink text-xs font-medium px-3 py-1.5 transition-colors"
                   >
                     {term}
                   </button>
@@ -171,7 +180,7 @@ export default function FilterSheet({
                     className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium border flex items-center justify-between gap-2 transition-colors ${
                       selected
                         ? 'bg-primary border-primary text-cream font-semibold'
-                        : 'bg-surface border-hairline text-ink hover:bg-cream'
+                        : 'bg-surface border-hairline text-ink pointer-fine:hover:bg-cream'
                     }`}
                   >
                     <span className="truncate">{option.label}</span>
@@ -198,7 +207,7 @@ export default function FilterSheet({
                     className={`rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium flex items-center justify-between gap-2 transition-colors ${
                       selected
                         ? 'bg-primary text-cream shadow-xs'
-                        : 'bg-cream border border-hairline text-ink hover:bg-linen'
+                        : 'bg-cream border border-hairline text-ink pointer-fine:hover:bg-linen'
                     }`}
                   >
                     <span className="truncate">
@@ -232,7 +241,7 @@ export default function FilterSheet({
             className="flex-[1.7] [--shiny-btn-size:0.9rem]"
           />
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

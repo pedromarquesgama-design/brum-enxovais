@@ -63,11 +63,11 @@ const RealismButton = ({
   const content = (
     <>
       {/* Glow behind button */}
-      <div className="absolute top-0 right-0 w-[65%] h-[60%] rounded-[120px] shadow-[0_0_20px_#fdae4333] group-hover:shadow-[0_0_40px_#fdae4359] transition-all duration-300 ease-out -z-10" />
+      <div className="absolute top-0 right-0 w-[65%] h-[60%] rounded-[120px] shadow-[0_0_20px_#fdae4333] pointer-fine:group-hover:shadow-[0_0_40px_#fdae4359] transition-all duration-300 ease-out -z-10" />
 
       {/* Inner content */}
       <div
-        className={`relative flex items-center justify-center gap-2 px-[calc(var(--shiny-btn-size,1.4rem)*1.1)] py-[calc(var(--shiny-btn-size,1.4rem)*0.62)] group-hover:scale-110 rounded-[14px] z-10 transition-all duration-300 ${plate}`}
+        className={`relative flex items-center justify-center gap-2 px-[calc(var(--shiny-btn-size,1.4rem)*1.1)] py-[calc(var(--shiny-btn-size,1.4rem)*0.62)] pointer-fine:group-hover:scale-110 rounded-[14px] z-10 transition-all duration-300 ${plate}`}
       >
         {text}
 

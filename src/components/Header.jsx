@@ -1,9 +1,56 @@
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { STORE_INFO } from '../data/catalog';
-import { IconBag, IconClose, IconHeart, IconMenu, IconSearch } from './Icons';
+import { IconBag, IconHeart, IconSearch } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
 
 const SHOW_AFTER_PX = 24;
+
+// As três barras viram um X quando o menu abre.
+function MenuIcon({ open }) {
+  const transition = { type: 'spring', stiffness: 420, damping: 32 };
+  const origin = { transformBox: 'fill-box', transformOrigin: 'center' };
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      aria-hidden="true"
+      className="w-6 h-6"
+    >
+      <motion.line
+        x1="4"
+        y1="12"
+        x2="20"
+        y2="12"
+        animate={open ? { y: 0, rotate: 45 } : { y: -5, rotate: 0 }}
+        transition={transition}
+        style={origin}
+      />
+      <motion.line
+        x1="4"
+        y1="12"
+        x2="20"
+        y2="12"
+        animate={open ? { y: 0, rotate: -45, opacity: 0 } : { y: 0, rotate: 0, opacity: 1 }}
+        transition={transition}
+        style={origin}
+      />
+      <motion.line
+        x1="4"
+        y1="12"
+        x2="20"
+        y2="12"
+        animate={open ? { y: 0, rotate: -45 } : { y: 5, rotate: 0 }}
+        transition={transition}
+        style={origin}
+      />
+    </svg>
+  );
+}
 
 const NAV_LINKS = [
   { href: '#inicio', label: 'Início' },
@@ -69,16 +116,17 @@ export default function Header({
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-[74px] flex items-center justify-between gap-2 sm:gap-3">
           {/* Mobile menu toggle */}
           <div className="flex items-center lg:hidden shrink-0">
-            <button
+            <motion.button
               type="button"
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav-drawer"
               aria-label={mobileOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-              className="p-1.5 sm:p-2 -ml-1 sm:-ml-2 rounded-full text-primary hover:bg-linen transition-colors"
+              className="p-1.5 sm:p-2 -ml-1 sm:-ml-2 rounded-full text-primary pointer-fine:hover:bg-linen transition-colors"
+              whileTap={{ scale: 0.9 }}
             >
-              {mobileOpen ? <IconClose className="w-5 h-5 sm:w-6 sm:h-6" /> : <IconMenu className="w-5 h-5 sm:w-6 sm:h-6" />}
-            </button>
+              <MenuIcon open={mobileOpen} />
+            </motion.button>
           </div>
 
           {/* Brand Identity */}
@@ -101,7 +149,7 @@ export default function Header({
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-ink-muted hover:text-primary transition-colors py-1"
+                className="text-sm font-medium text-ink-muted pointer-fine:hover:text-primary transition-colors py-1"
               >
                 {link.label}
               </a>
@@ -110,20 +158,22 @@ export default function Header({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-0.5 sm:gap-2 shrink-0">
-            <button
+            <motion.button
               type="button"
               onClick={onOpenSearch}
               aria-label="Buscar produtos e abrir filtros"
-              className="p-1.5 sm:p-2 rounded-full text-ink hover:text-primary hover:bg-linen transition-colors"
+              className="p-1.5 sm:p-2 rounded-full text-ink pointer-fine:hover:text-primary pointer-fine:hover:bg-linen transition-colors"
+              whileTap={{ scale: 0.88 }}
             >
               <IconSearch className="w-5 h-5" />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               type="button"
               onClick={onOpenWishlist}
               aria-label={`Abrir favoritos (${wishlistCount} ${wishlistCount === 1 ? 'item' : 'itens'})`}
-              className="relative p-1.5 sm:p-2 rounded-full text-ink hover:text-primary hover:bg-linen transition-colors"
+              className="relative p-1.5 sm:p-2 rounded-full text-ink pointer-fine:hover:text-primary pointer-fine:hover:bg-linen transition-colors"
+              whileTap={{ scale: 0.88 }}
             >
               <IconHeart className="w-5 h-5" />
               {wishlistCount > 0 && (
@@ -131,7 +181,7 @@ export default function Header({
                   {wishlistCount}
                 </span>
               )}
-            </button>
+            </motion.button>
 
             <RealismButton
               text={
@@ -151,24 +201,34 @@ export default function Header({
         </div>
 
         {/* Mobile Dropdown Navigation */}
-        {mobileOpen && (
-          <nav
-            id="mobile-nav-drawer"
-            aria-label="Menu mobile"
-            className="lg:hidden border-t border-hairline bg-surface px-4 py-4 space-y-1 shadow-lg"
-          >
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block rounded-xl px-4 py-3 text-base font-medium text-ink-strong hover:bg-linen transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        )}
+        <AnimatePresence initial={false}>
+          {mobileOpen && (
+            <motion.nav
+              key="mobile-nav"
+              id="mobile-nav-drawer"
+              aria-label="Menu mobile"
+              className="lg:hidden overflow-hidden border-t border-hairline bg-surface px-4 py-4 space-y-1 shadow-lg"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {NAV_LINKS.map((link, index) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-xl px-4 py-3 text-base font-medium text-ink-strong pointer-fine:hover:bg-linen transition-colors"
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + index * 0.04, duration: 0.24 }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </header>
     </div>
   );

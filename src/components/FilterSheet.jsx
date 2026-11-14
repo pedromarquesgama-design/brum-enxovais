@@ -220,7 +220,6 @@ export default function FilterSheet({
             className="flex-1 [--shiny-btn-size:0.9rem]"
           />
           <RealismButton
-            tone="green"
             text={
               <>
                 <span>Aplicar Filtros</span>

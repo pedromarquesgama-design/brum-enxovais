@@ -71,6 +71,7 @@ export default function ProductCard({
           </button>
 
           <RealismButton
+            tone="accent"
             text={
               <>
                 <IconBag className="w-3.5 h-3.5 inline-block align-middle" /> Adicionar

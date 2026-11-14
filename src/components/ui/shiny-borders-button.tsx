@@ -4,7 +4,7 @@ export type ShinyBordersButtonProps = {
   /** Rótulo (ou conteúdo) exibido dentro do botão. */
   text: ReactNode;
   /** Paleta do botão. O formato (moldura + placa) é sempre o mesmo. */
-  tone?: 'primary' | 'green' | 'accent' | 'surface';
+  tone?: 'primary' | 'cream' | 'accent' | 'surface';
   /** Classes extras. O tamanho do texto é ajustado pela variável `--shiny-btn-size`. */
   className?: string;
   /** Quando informado, renderiza um link no lugar de um botão. */
@@ -20,12 +20,12 @@ export type ShinyBordersButtonProps = {
 // Moldura perolada + placa interna: o formato é comum a todos os botões do site.
 const TONES = {
   primary: {
-    shell: 'bg-[radial-gradient(circle_80px_at_80%_-10%,_#ffffff,_#d6cfc4)]',
-    plate: 'bg-[radial-gradient(circle_80px_at_80%_-50%,_#ffffff,_#f1ede6)] text-ink-strong',
-  },
-  green: {
     shell: 'bg-[radial-gradient(circle_80px_at_80%_-10%,_#faf8f5,_#1f434d)]',
     plate: 'bg-primary text-cream',
+  },
+  cream: {
+    shell: 'bg-[radial-gradient(circle_80px_at_80%_-10%,_#ffffff,_#d6cfc4)]',
+    plate: 'bg-[radial-gradient(circle_80px_at_80%_-50%,_#ffffff,_#f1ede6)] text-ink-strong',
   },
   accent: {
     shell: 'bg-[radial-gradient(circle_80px_at_80%_-10%,_#fff7e8,_#d98c25)]',

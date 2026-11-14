@@ -158,7 +158,7 @@ export default function ProductModal({
               target="_blank"
               rel="noopener noreferrer"
               text="Consultar disponibilidade"
-              className="w-full font-serif [--shiny-btn-size:1rem]"
+              className="w-full [--shiny-btn-size:0.85rem]"
             />
           </div>
         </div>

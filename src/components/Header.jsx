@@ -109,11 +109,17 @@ export default function Header({
         Pular para o conteúdo principal
       </a>
 
-      <div className="bg-primary-deep text-cream text-xs py-2 px-4 text-center border-b border-hairline-dark">
-        <p className="max-w-7xl mx-auto leading-snug">
-          <span className="sm:hidden">Brum Enxovais - Mais de 1.500 itens!</span>
-          <span className="hidden sm:inline">{STORE_INFO.announcement}</span>
-        </p>
+      <div className="bg-primary-deep text-cream text-xs py-2 border-b border-hairline-dark overflow-hidden">
+        <div className="animate-marquee items-center whitespace-nowrap">
+          {[0, 1, 2, 3].map((idx) => (
+            <span key={idx} className="inline-flex items-center px-6 leading-snug" aria-hidden={idx > 0}>
+              {salesman
+                ? `Bem-vindo à Brum Enxovais! Seu atendimento será com ${salesman.name}`
+                : STORE_INFO.announcement}
+              <span className="ml-12 text-accent/80" aria-hidden="true">✦</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       <header className="bg-cream/95 backdrop-blur-md border-b border-hairline">
@@ -162,11 +168,6 @@ export default function Header({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-0.5 sm:gap-2 shrink-0">
-            {salesman && (
-              <span className="shrink-0 text-xs bg-accent text-ink-strong rounded-full px-2.5 py-1 font-medium border border-hairline/60">
-                Vendedor: {salesman.name}
-              </span>
-            )}
             <motion.button
               type="button"
               onClick={onOpenSearch}

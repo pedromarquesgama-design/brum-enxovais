@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { STORE_INFO } from '../data/catalog';
 import { resolveSalesman } from '../data/salesmen';
+import { useHistoryBack } from '../hooks/useHistoryBack';
 import { IconBag, IconHeart, IconSearch } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
 
@@ -69,6 +70,7 @@ export default function Header({
   onOpenSearch,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  useHistoryBack(mobileOpen, () => setMobileOpen(false));
   const salesman = resolveSalesman();
   const [navVisible, setNavVisible] = useState(
     () => typeof window !== 'undefined' && window.scrollY > SHOW_AFTER_PX

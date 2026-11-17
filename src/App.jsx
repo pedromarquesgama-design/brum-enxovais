@@ -14,6 +14,7 @@ import ProductModal from './components/ProductModal';
 import PromoBanners from './components/PromoBanners';
 import WishlistDrawer from './components/WishlistDrawer';
 import { PRODUCTS } from './data/catalog';
+import { useHistoryBack } from './hooks/useHistoryBack';
 
 const INITIAL_VISIBLE = 24;
 const PAGE_STEP = 24;
@@ -32,6 +33,12 @@ export default function App() {
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
+
+  // Permite fechar modais e gavetas com o botão Voltar do celular.
+  useHistoryBack(isFilterSheetOpen, () => setIsFilterSheetOpen(false));
+  useHistoryBack(Boolean(activeProduct), () => setActiveProduct(null));
+  useHistoryBack(isCartOpen, () => setIsCartOpen(false));
+  useHistoryBack(isWishlistOpen, () => setIsWishlistOpen(false));
 
   const showToast = (msg) => {
     setToastMessage(msg);

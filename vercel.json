@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/venda/:slug", "destination": "/" }
+    { "source": "/venda/:slug", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

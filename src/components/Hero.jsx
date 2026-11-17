@@ -11,9 +11,9 @@ const WHEEL_COOLDOWN_MS = 520;
 
 // Posição dos botões (% da arte) alinhada ao espaço vazio de cada banner.
 const CTAS = {
-  slide1: { label: 'Explorar Coleção', category: 'Banho', tone: 'primary', m: ['50%', '87.5%'], d: ['66%', '16%'] },
-  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'primary', m: ['50%', '87.5%'], d: ['5.4%', '58%'] },
-  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'cream', m: ['50%', '79%'], d: ['56%', '60%'] },
+  slide1: { label: 'Explorar Coleção', category: 'Banho', tone: 'primary', m: ['50%', '78%'], d: ['58%', '62%'] },
+  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'primary', m: ['50%', '78%'], d: ['58%', '62%'] },
+  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'cream', m: ['50%', '78%'], d: ['58%', '62%'] },
 };
 
 export default function Hero({ onSelectCategory }) {
@@ -235,7 +235,7 @@ export default function Hero({ onSelectCategory }) {
               )}
               <div
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className="absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)] md:-translate-x-1/2 md:-translate-y-1/2"
+                className="absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
               >
                 <RealismButton
                   tone={cta.tone}

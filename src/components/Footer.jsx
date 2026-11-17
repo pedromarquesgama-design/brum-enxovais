@@ -1,9 +1,11 @@
-import { CATEGORIES, STORE_INFO, buildWhatsAppUrl } from '../data/catalog';
+import { CATEGORIES, STORE_INFO } from '../data/catalog';
+import { resolveSalesman, buildWhatsAppUrl } from '../data/salesmen';
 import { IconChevronDown, IconMail, IconPhone, IconWhatsApp } from './Icons';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer({ onSelectCategory }) {
+  const salesman = resolveSalesman();
   const goToCategory = (category) => {
     onSelectCategory(category);
     const el = document.getElementById('catalogo');
@@ -37,7 +39,7 @@ export default function Footer({ onSelectCategory }) {
 
             <div className="mt-6 flex items-center gap-2.5">
               <a
-                href={buildWhatsAppUrl('Olá, Brum Enxovais!')}
+                href={buildWhatsAppUrl('Olá, Brum Enxovais!', salesman)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar no WhatsApp"

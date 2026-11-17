@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { STORE_INFO } from '../data/catalog';
+import { resolveSalesman } from '../data/salesmen';
 import { IconBag, IconHeart, IconSearch } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
 
@@ -68,6 +69,7 @@ export default function Header({
   onOpenSearch,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const salesman = resolveSalesman();
   const [navVisible, setNavVisible] = useState(
     () => typeof window !== 'undefined' && window.scrollY > SHOW_AFTER_PX
   );
@@ -158,6 +160,11 @@ export default function Header({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-0.5 sm:gap-2 shrink-0">
+            {salesman && (
+              <span className="shrink-0 text-xs bg-accent text-ink-strong rounded-full px-2.5 py-1 font-medium border border-hairline/60">
+                Vendedor: {salesman.name}
+              </span>
+            )}
             <motion.button
               type="button"
               onClick={onOpenSearch}

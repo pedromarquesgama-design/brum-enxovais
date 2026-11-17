@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { buildWhatsAppUrl } from '../data/catalog';
+import { resolveSalesman, buildWhatsAppUrl } from '../data/salesmen';
 import { IconBag, IconClose, IconHeart, IconMinus, IconPlus } from './Icons';
 import ImageLightbox from './ui/image-lightbox';
 import RealismButton from './ui/shiny-borders-button';
@@ -42,7 +42,10 @@ export default function ProductModal({
     return () => window.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
-  const whatsappMessage = `Olá, Brum Enxovais! Gostaria de solicitar orçamento e disponibilidade para:\n• ${product.name} (${product.sku})\n• Departamento: ${product.category}\n• Quantidade: ${quantity}`;
+  const salesman = resolveSalesman();
+  const whatsappMessage = salesman
+    ? `Olá, ${salesman.name}! Gostaria de solicitar orçamento e disponibilidade para:\n• ${product.name} (${product.sku})\n• Departamento: ${product.category}\n• Quantidade: ${quantity}`
+    : `Olá, Brum Enxovais! Gostaria de solicitar orçamento e disponibilidade para:\n• ${product.name} (${product.sku})\n• Departamento: ${product.category}\n• Quantidade: ${quantity}`;
 
   return (
     <motion.div
@@ -183,7 +186,7 @@ export default function ProductModal({
             </div>
 
             <RealismButton
-              href={buildWhatsAppUrl(whatsappMessage)}
+              href={buildWhatsAppUrl(whatsappMessage, salesman)}
               target="_blank"
               rel="noopener noreferrer"
               text="Consultar disponibilidade"

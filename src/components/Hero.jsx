@@ -11,9 +11,9 @@ const WHEEL_COOLDOWN_MS = 520;
 
 // Posição dos botões (% da arte) alinhada ao espaço vazio de cada banner.
 const CTAS = {
-  slide1: { label: 'Explorar Coleção', category: 'Banho', tone: 'primary', m: ['50%', '78%'], d: ['58%', '62%'] },
-  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'primary', m: ['50%', '78%'], d: ['58%', '62%'] },
-  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'cream', m: ['50%', '78%'], d: ['58%', '62%'] },
+  slide1: { label: 'Explorar Coleção', category: 'Banho', tone: 'primary', m: ['50%', '78%'], d: ['73%', '16%'] },
+  slide2: { label: 'Ver Utilidades', category: 'Eletro & Utilidades', tone: 'primary', m: ['50%', '78%'], d: ['12.5%', '58%'] },
+  slide3: { label: 'Ver Mesa Posta', category: 'Mesa', tone: 'cream', m: ['50%', '78%'], d: ['77%', '62%'] },
 };
 
 export default function Hero({ onSelectCategory }) {
@@ -170,8 +170,20 @@ export default function Hero({ onSelectCategory }) {
       id="inicio"
       aria-label="Destaques principais"
       onKeyDown={handleKeyDown}
-      className="relative w-full overflow-hidden bg-cream"
+      className="relative w-full overflow-hidden bg-cream md:h-[100svh] md:flex md:items-center md:justify-start"
     >
+      {/* Ambient backdrop so wide screens have immersive edge-to-edge color */}
+      <div
+        aria-hidden="true"
+        className="hidden md:block absolute inset-0 -z-10 pointer-events-none scale-105 blur-2xl opacity-35 transition-all duration-700"
+      >
+        <img
+          src={HERO_SLIDES[index].desktop}
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+
       <div
         onWheel={handleWheel}
         onTouchStart={(e) => e.touches[0] && beginGesture(e.touches[0].clientX, e.touches[0].clientY)}
@@ -185,25 +197,31 @@ export default function Hero({ onSelectCategory }) {
         onMouseUp={endGesture}
         onMouseLeave={endGesture}
         onClickCapture={handleClickCapture}
-        className="relative w-full h-[100svh] md:h-auto md:aspect-[1024/571] [container-type:inline-size] touch-pan-y select-none cursor-grab active:cursor-grabbing"
+        className="relative w-full h-[100svh] md:h-[min(100svh,calc((100vw-220px)*571/1024))] md:w-[min(calc(100svh*1024/571),calc(100vw-220px))] md:aspect-[1024/571] [container-type:inline-size] touch-pan-y select-none cursor-grab active:cursor-grabbing"
       >
         {HERO_SLIDES.map((item, idx) => {
           const isCurrent = idx === index;
           const offset = offsetOf(idx);
           const cta = CTAS[item.id];
 
-          const transform = `translateX(calc(${offset * 100}% + ${dragX}px))`;
+          // Next slide is tucked slightly behind the active card for a layered overlap effect
+          const overlap = isMobile ? 0 : -60;
+          const zIndex = isCurrent ? 'z-30' : (offset > 0 ? 'z-10' : 'z-0');
+          const transform = `translateX(calc(${offset * 100}% + ${offset * overlap}px + ${dragX}px))`;
           const transitionClass = isDragging
             ? 'transition-none'
-            : 'transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]';
+            : 'transition-all duration-[650ms] ease-[cubic-bezier(0.25,1,0.5,1)]';
 
           return (
             <div
               key={item.id}
               aria-hidden={!isCurrent}
+              onClick={!isCurrent ? () => step(offset) : undefined}
               style={{ transform }}
-              className={`absolute inset-0 ${transitionClass} ${
-                isCurrent ? 'z-20' : 'z-10 pointer-events-none'
+              className={`absolute inset-0 rounded-2xl md:rounded-r-3xl md:rounded-l-none overflow-hidden ${transitionClass} ${zIndex} ${
+                isCurrent
+                  ? 'opacity-100 shadow-[14px_0_45px_-5px_rgba(3,45,54,0.45),0_25px_60px_-15px_rgba(3,45,54,0.35)]'
+                  : 'opacity-75 pointer-fine:hover:opacity-95 shadow-[0_15px_35px_-10px_rgba(3,45,54,0.25)] cursor-pointer md:rounded-3xl'
               }`}
             >
               {isMobile ? (
@@ -235,7 +253,7 @@ export default function Hero({ onSelectCategory }) {
               )}
               <div
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className="absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
+                className="absolute left-[var(--ml)] top-[var(--mt)] -translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
               >
                 <RealismButton
                   tone={cta.tone}

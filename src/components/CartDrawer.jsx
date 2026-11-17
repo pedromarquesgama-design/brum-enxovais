@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { buildWhatsAppUrl } from '../data/catalog';
+import { resolveSalesman, buildWhatsAppUrl } from '../data/salesmen';
 import { IconBag, IconClose, IconMinus, IconPlus, IconTrash } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
 
@@ -22,6 +22,8 @@ export default function CartDrawer({
 
   if (!isOpen) return null;
 
+  const salesman = resolveSalesman();
+
   const totalUnits = items.reduce((sum, item) => sum + item.qty, 0);
 
   const summaryLines = items
@@ -32,7 +34,10 @@ export default function CartDrawer({
     .join('\n');
 
   const whatsappHref = buildWhatsAppUrl(
-    `Olá, Brum Enxovais! Gostaria de solicitar disponibilidade e orçamento para os itens abaixo:\n\n${summaryLines}`
+    salesman
+      ? `Olá, ${salesman.name}! Gostaria de solicitar disponibilidade e orçamento para os itens abaixo:\n\n${summaryLines}`
+      : `Olá, Brum Enxovais! Gostaria de solicitar disponibilidade e orçamento para os itens abaixo:\n\n${summaryLines}`,
+    salesman
   );
 
   return (
@@ -157,6 +162,14 @@ export default function CartDrawer({
                 {items.length} {items.length === 1 ? 'produto' : 'produtos'} ({totalUnits} un.)
               </span>
             </div>
+
+            {salesman && (
+              <p className="text-xs text-ink-muted text-center leading-snug">
+                Seu orçamento será enviado para{' '}
+                <span className="font-semibold text-ink-strong">{salesman.name}</span>{' '}
+                por WhatsApp.
+              </p>
+            )}
 
             <RealismButton
               href={whatsappHref}

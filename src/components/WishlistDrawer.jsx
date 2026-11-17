@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { IconClose, IconHeart, IconPlus, IconTrash } from './Icons';
 import RealismButton from './ui/shiny-borders-button';
 
@@ -19,21 +20,31 @@ export default function WishlistDrawer({
     return () => window.removeEventListener('keydown', onKey);
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-50 flex justify-end bg-ink-strong/55 backdrop-blur-xs"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <aside
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="wishlist-drawer-title"
-        className="w-full max-w-md bg-surface h-full flex flex-col border-l border-hairline shadow-2xl"
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="wishlist-drawer-backdrop"
+          className="fixed inset-0 z-50 flex justify-end bg-ink-strong/55 backdrop-blur-xs"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) onClose();
+          }}
+        >
+          <motion.aside
+            key="wishlist-drawer-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="wishlist-drawer-title"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 32, stiffness: 360, mass: 0.85 }}
+            className="w-full max-w-md bg-surface h-full flex flex-col border-l border-hairline shadow-2xl"
+          >
         <div className="px-5 py-4 border-b border-hairline flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <IconHeart className="w-5 h-5 text-primary" filled />
@@ -135,7 +146,9 @@ export default function WishlistDrawer({
             ))
           )}
         </div>
-      </aside>
-    </div>
+          </motion.aside>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

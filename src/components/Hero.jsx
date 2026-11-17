@@ -235,7 +235,7 @@ export default function Hero({ onSelectCategory }) {
               )}
               <div
                 style={{ '--ml': cta.m[0], '--mt': cta.m[1], '--dl': cta.d[0], '--dt': cta.d[1] }}
-                className="absolute left-[var(--ml)] top-[var(--mt)] max-md:-translate-x-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
+                className="absolute left-[var(--ml)] top-[var(--mt)] -translate-x-1/2 -translate-y-1/2 md:left-[var(--dl)] md:top-[var(--dt)]"
               >
                 <RealismButton
                   tone={cta.tone}

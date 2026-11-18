@@ -56,20 +56,12 @@ export default function PromoBanners({ onSelectCategory }) {
               </p>
             </div>
 
-            <div className="relative z-10 mt-6 flex flex-wrap gap-2.5 items-center">
+            <div className="relative z-10 mt-6">
               <RealismButton
                 text="Ver Mesa Posta"
                 onClick={() => jumpToCategory('Mesa')}
                 className="font-serif"
               />
-
-              <button
-                type="button"
-                onClick={() => jumpToCategory('Panelas & Cozinha')}
-                className="inline-flex items-center justify-center rounded-full bg-surface pointer-fine:hover:bg-cream text-primary border border-hairline font-semibold text-sm px-5 py-3 shadow-md transition-[transform,background-color,box-shadow] duration-200 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-md active:translate-y-0"
-              >
-                Cozinha &amp; Panelas
-              </button>
             </div>
           </div>
         </div>

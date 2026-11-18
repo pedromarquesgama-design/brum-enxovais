@@ -1,6 +1,6 @@
 import { CATEGORIES, STORE_INFO } from '../data/catalog';
 import { resolveSalesman, buildWhatsAppUrl } from '../data/salesmen';
-import { IconChevronDown, IconMail, IconPhone, IconWhatsApp } from './Icons';
+import { IconChevronDown, IconPhone, IconWhatsApp } from './Icons';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -46,13 +46,6 @@ export default function Footer({ onSelectCategory }) {
                 className="w-10 h-10 rounded-full bg-primary pointer-fine:hover:bg-accent pointer-fine:hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
               >
                 <IconWhatsApp className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${STORE_INFO.email}`}
-                aria-label="Enviar e-mail"
-                className="w-10 h-10 rounded-full bg-primary pointer-fine:hover:bg-accent pointer-fine:hover:text-ink-strong text-cream border border-hairline-dark flex items-center justify-center transition-colors"
-              >
-                <IconMail className="w-4 h-4" />
               </a>
               <a
                 href={`tel:${STORE_INFO.whatsappDigits}`}
@@ -118,8 +111,6 @@ export default function Footer({ onSelectCategory }) {
               <h3 className="text-sm font-semibold text-cream mb-3.5">Atendimento</h3>
               <ul className="space-y-2.5 text-sm text-cream/80">
                 <li className="tabular-nums">{STORE_INFO.phoneDisplay}</li>
-                <li className="[overflow-wrap:anywhere]">{STORE_INFO.email}</li>
-                <li>{STORE_INFO.address}</li>
                 <li>{STORE_INFO.hours}</li>
               </ul>
             </div>
@@ -168,8 +159,6 @@ export default function Footer({ onSelectCategory }) {
               </summary>
               <ul className="pt-2 pb-1 space-y-2 text-sm text-cream/80">
                 <li className="tabular-nums">{STORE_INFO.phoneDisplay}</li>
-                <li>{STORE_INFO.email}</li>
-                <li>{STORE_INFO.address}</li>
                 <li>{STORE_INFO.hours}</li>
               </ul>
             </details>

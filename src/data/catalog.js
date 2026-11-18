@@ -15,8 +15,6 @@ export const STORE_INFO = {
   tagline: 'Cama, Mesa, Banho e Utilidades',
   phoneDisplay: '(37) 99949-8599',
   whatsappDigits: '5537999498599',
-  email: 'atendimento@brumenxovais.com.br',
-  address: 'Rua das Paineiras, 420 — Centro, São Paulo/SP',
   hours: 'Seg a Sex: 09h às 18h · Sáb: 09h às 13h',
   announcement: 'Catálogo Completo com 1.428 Produtos Classificados · Solicite Seu Orçamento sem Compromisso',
   recentSearches: [

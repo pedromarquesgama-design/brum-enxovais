@@ -1,6 +1,6 @@
 import { STORE_INFO } from '../data/catalog';
 import { resolveSalesman, buildWhatsAppUrl } from '../data/salesmen';
-import { IconMail, IconMapPin, IconPhone } from './Icons';
+import { IconPhone } from './Icons';
 
 export default function ContactSection() {
   const salesman = resolveSalesman();
@@ -30,7 +30,7 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="max-w-md">
           <a
             href={whatsappHref}
             target="_blank"
@@ -48,37 +48,6 @@ export default function ContactSection() {
               <p className="mt-1 text-xs text-ink-muted">{STORE_INFO.hours}</p>
             </div>
           </a>
-
-          <a
-            href={`mailto:${STORE_INFO.email}`}
-            className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline pointer-fine:hover:border-primary/50 transition-colors"
-          >
-            <div className="w-11 h-11 rounded-full bg-accent-soft text-accent-ink flex items-center justify-center shrink-0">
-              <IconMail className="w-5 h-5" />
-            </div>
-            <div className="min-w-0">
-              <h3 className="text-sm font-semibold text-ink-strong">E-mail Comercial</h3>
-              <p className="mt-0.5 text-sm font-medium text-primary break-all">
-                {STORE_INFO.email}
-              </p>
-              <p className="mt-1 text-xs text-ink-muted">
-                Orçamentos de enxoval e pedidos corporativos
-              </p>
-            </div>
-          </a>
-
-          <div className="flex items-start gap-4 rounded-2xl bg-surface p-5 sm:p-6 border border-hairline">
-            <div className="w-11 h-11 rounded-full bg-linen text-primary flex items-center justify-center shrink-0">
-              <IconMapPin className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-ink-strong">Endereço Ilustrativo</h3>
-              <p className="mt-0.5 text-sm text-ink">{STORE_INFO.address}</p>
-              <p className="mt-1 text-xs text-ink-muted">
-                Envio estruturado para todo o território nacional
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
